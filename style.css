@@ -19,7 +19,7 @@ body {
   max-width: 1620px;
   margin: 0 auto;
   /* Centers the container */
-  padding: 0 20px;
+  padding: 0 10px;
   /* Adds breathing room on small screens */
   width: 100%;
 }
@@ -28,7 +28,7 @@ body {
 header {
   width: 100%;
   padding-top: 60px;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
   /* Space between header and hero */
 }
 
@@ -94,14 +94,14 @@ h1 {
   font-weight: 600;
   font-size: 100px;
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .hero-text p {
   font-size: 30px;
   line-height: 1.4;
   color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 /* --- Buttons --- */
