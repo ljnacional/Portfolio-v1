@@ -117,7 +117,7 @@ nav a:hover {
   width: 100%;
   padding-top: 100px;
   /* EDIT HERE: Increase this to push the hero section lower */
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   /* EDIT HERE: Space below the hero section */
 
   display: flex;
@@ -222,7 +222,7 @@ nav a:hover {
 .about-section {
   width: 100%;
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   position: relative;
 }
 
@@ -384,4 +384,161 @@ nav a:hover {
   .edu-year {
     text-align: left;
   }
+}
+
+/* --- Skills Section --- */
+
+.skills-section {
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+.skills-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* --- Left Side: Typography --- */
+.skills-typography {
+  text-align: left;
+  flex: 1;
+  min-width: 300px;
+  /* Prevents text from squishing too much */
+}
+
+.role-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 110px;
+  /* Matches visual weight */
+  line-height: 1.1;
+  color: rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.role-text.highlight {
+  color: #000000;
+  /* Fully black for ARCHITECT */
+}
+
+/* --- Right Side: Bento Grid --- */
+.skills-grid-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skills-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 85px;
+  color: rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 columns */
+  gap: 20px;
+}
+
+/* --- Skill Box Styling --- */
+.skill-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 170px;
+  height: 150px;
+
+  /* Glassmorphism Background */
+  background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 77.08%, rgba(0, 0, 0, 0.05) 100%);
+  backdrop-filter: blur(40px);
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.skill-box:hover {
+  transform: translateY(-5px);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* --- SVG Icon Sizing --- */
+/* Wrapper ensures SVGs stay centered and sized correctly */
+.icon-wrapper {
+  width: 88px;
+  /* Fixed size for all icons */
+  height: 82px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Placeholder Icon Styling (FontAwesome) */
+.placeholder-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #333;
+  opacity: 0.5;
+}
+
+/* Text Label */
+.skill-box span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+  .role-text {
+    font-size: 60px;
+  }
+
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 3 cols on laptop */
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .skills-typography {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .role-text {
+    font-size: 50px;
+  }
+
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 2 cols on mobile */
 }
