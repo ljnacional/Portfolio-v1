@@ -790,3 +790,237 @@ nav a:hover {
     text-align: center;
   }
 }
+
+/* --- Contact Section --- */
+
+.contact-section {
+  width: 100%;
+  padding-top: 100px;
+  /* EDIT HERE: Space above section */
+  padding-bottom: 150px;
+  /* EDIT HERE: Space below section */
+  background: #FFFFFF;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  /* Pushes form left and text right */
+  gap: 50px;
+  /* EDIT HERE: Gap between the two columns */
+  flex-wrap: wrap;
+  /* Allows stacking on mobile */
+}
+
+/* --- Left Side: Form --- */
+.contact-left {
+  flex: 1;
+  max-width: 800px;
+  /* Limits the width of the form area */
+  min-width: 300px;
+}
+
+.contact-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 95px;
+  /* EDIT HERE: Size of "CONTACT ME" title */
+  line-height: 100%;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 40px;
+  /* EDIT HERE: Space below the title */
+  text-transform: uppercase;
+}
+
+/* Form Styles */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  /* EDIT HERE: Space between input fields */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  /* EDIT HERE: Label text size */
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Shared Input Styling */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: #EBEBEB;
+  /* EDIT HERE: Input background color */
+  border: 0.5px solid #000000;
+  /* EDIT HERE: Input border */
+  border-radius: 5px;
+  /* EDIT HERE: Input corner radius */
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  /* EDIT HERE: Input text size */
+  color: #000000;
+
+  padding: 15px;
+  /* EDIT HERE: Inner spacing of inputs */
+  outline: none;
+}
+
+.form-group textarea {
+  height: 150px;
+  /* EDIT HERE: Height of the message box */
+  resize: none;
+  /* Prevents user from resizing */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  /* Placeholder text color */
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  /* Makes button fill the width */
+  height: 50px;
+  background: rgba(0, 0, 0, 0.8);
+  /* EDIT HERE: Button background color */
+  border: 0.5px solid #000000;
+  border-radius: 5px;
+
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  /* EDIT HERE: Button text size */
+  color: #FFFFFF;
+  /* EDIT HERE: Button text color */
+
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: #000000;
+  /* Darkens on hover */
+}
+
+/* --- Right Side: Let's Connect --- */
+.contact-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Vertically centers the content */
+  align-items: flex-start;
+  /* Aligns text to the left relative to this column */
+  padding-left: 50px;
+  /* EDIT HERE: Space separating it from the form */
+}
+
+.connect-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 110px;
+  /* EDIT HERE: Size of large text */
+  line-height: 100%;
+  margin: 0;
+}
+
+.lets {
+  color: rgba(0, 0, 0, 0.8);
+  /* Faded black */
+}
+
+.connect {
+  color: #000000;
+  /* Solid black */
+}
+
+/* Icons */
+.connect-icons {
+  display: flex;
+  gap: 30px;
+  /* EDIT HERE: Space between icons */
+  margin-top: 40px;
+  /* EDIT HERE: Space between text and icons */
+}
+
+.icon-box {
+  color: #000000;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon-box svg {
+  width: 88px;
+  /* EDIT HERE: Icon size */
+  height: 82px;
+  stroke-width: 2;
+  /* Thickness of the icon lines */
+}
+
+.icon-box:hover {
+  transform: translateY(-5px);
+  /* Lifts up on hover */
+  color: rgba(0, 0, 0, 0.6);
+  /* Optional hover color change */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+  .contact-title {
+    font-size: 70px;
+  }
+
+  .connect-text h2 {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contact-container {
+    flex-direction: column;
+    /* Stack vertically on mobile */
+  }
+
+  .contact-left,
+  .contact-right {
+    max-width: 100%;
+    padding-left: 0;
+  }
+
+  .contact-right {
+    align-items: center;
+    /* Center "Let's Connect" on mobile */
+    margin-top: 50px;
+  }
+
+  .connect-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 50px;
+  }
+
+  .connect-text h2 {
+    font-size: 60px;
+  }
+
+  .icon-box svg {
+    width: 40px;
+    height: 40px;
+  }
+}
