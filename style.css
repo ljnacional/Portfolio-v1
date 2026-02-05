@@ -8,173 +8,211 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #FFFFFF;
+  /* EDIT HERE: Change website background color */
   color: #000000;
   overflow-x: hidden;
 }
 
-/* MASTER CONTAINER 
-   Adjust 'max-width' here to control the width of the entire site content.
-*/
+/* MASTER CONTAINER */
 .container {
   max-width: 1620px;
+  /* EDIT HERE: Controls the maximum width of the content */
   margin: 0 auto;
-  /* Centers the container */
-  padding: 0 10px;
-  /* Adds breathing room on small screens */
+  padding: 0 20px;
+  /* EDIT HERE: Side padding for smaller screens */
   width: 100%;
 }
 
 /* --- Header / Navbar --- */
 header {
   width: 100%;
-  padding-top: 60px;
-  margin-bottom: 100px;
-  /* Space between header and hero */
+  padding-top: 30px;
+  /* CHANGED: 60px -> 30px (Matches Figma 'top: 30px') */
+  margin-bottom: 50px;
+  /* This creates the gap before the Hero section */
+  background-color: transparent;
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 80px;
+  /* ADD THIS LINE: Controls the specific height of the navbar content */
 }
 
 .logo {
   font-weight: 400;
   font-size: 22px;
+  /* EDIT HERE: Size of "Luke Nacional" text */
+  color: #000000;
+  /* EDIT HERE: Color of the logo text */
 }
 
+/* Navigation Links */
 nav {
   display: flex;
   gap: 50px;
+  /* EDIT HERE: Space between "Home", "About", etc. */
 }
 
 nav a {
   text-decoration: none;
   color: #000000;
+  /* EDIT HERE: Link text color */
   font-size: 22px;
+  /* EDIT HERE: Link text size */
+  font-weight: 400;
+  /* EDIT HERE: Link thickness (400=normal, 600=bold) */
+  transition: color 0.3s ease;
+  /* Smooth hover effect */
 }
 
+nav a:hover {
+  color: #555555;
+  /* EDIT HERE: Color when hovering over links */
+}
+
+/* --- SVG Icon Styling --- */
 .social-icons {
   display: flex;
   gap: 30px;
+  /* EDIT HERE: Space between the LinkedIn and GitHub icons */
+  align-items: center;
 }
 
-.social-icons a {
-  color: #000000;
-  font-size: 24px;
+/* Shared styles for both SVGs */
+.lucide-linkedin,
+.lucide-github {
+  width: 30px;
+  /* EDIT HERE: Change icon SIZE (width) */
+  height: 30px;
+  /* EDIT HERE: Change icon SIZE (height) - keep same as width */
+
+  fill: none;
+  /* EDIT HERE: 'none' for outlined icons, or a color hex for filled icons */
+  stroke: #000000;
+  /* EDIT HERE: Change icon LINE COLOR */
+  stroke-width: 2;
+  /* EDIT HERE: Change line THICKNESS */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* Enables smooth animation on hover */
+}
+
+/* Hover effect for SVGs */
+.social-icons a:hover svg {
+  stroke: #555555;
+  /* EDIT HERE: Change line color when HOVERING */
+  transform: scale(1.1);
+  /* EDIT HERE: Slightly zoom in on hover (remove to disable) */
 }
 
 /* --- Hero Section --- */
+
+.hero-section {
+  width: 100%;
+  padding-top: 100px;
+  /* EDIT HERE: Increase this to push the hero section lower */
+  padding-bottom: 100px;
+  /* EDIT HERE: Space below the hero section */
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .hero-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  /* Vertically centers text with the image */
-  justify-content: space-between;
-  gap: 50px;
-  /* Space between text and image */
-  padding-bottom: 100px;
+  /* Centers items horizontally */
+  max-width: 1000px;
+  /* EDIT HERE: Maximum width of the entire hero content area */
 }
 
-/* --- Left Side: Text --- */
-.hero-text {
-  flex: 1;
-  /* Takes up available space */
-  max-width: 720px;
-  /* Prevents text from getting too wide */
-}
+/* "HELLO, I AM LUKE NACIONAL" */
+.hero-sub {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 
-.welcome-label {
-  display: block;
   font-size: 30px;
+  /* EDIT HERE: Size of the small top text */
   color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 10px;
+  /* EDIT HERE: Text color (0.5 is 50% opacity) */
+
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  /* EDIT HERE: Gap between this text and the big main text */
 }
 
-h1 {
+/* Main Description Text */
+.hero-main {
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 100px;
-  line-height: 1.1;
-  margin-bottom: 10px;
-}
 
-.hero-text p {
-  font-size: 30px;
-  line-height: 1.4;
+  font-size: 40px;
+  /* EDIT HERE: Size of the main headline */
+  line-height: 120%;
+  /* EDIT HERE: Spacing between lines of text */
   color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 20px;
+  /* EDIT HERE: Text color (0.8 is 80% opacity) */
+
+  text-align: center;
+  max-width: 800px;
+  /* EDIT HERE: Controls how wide the text block can get before wrapping */
+  margin-bottom: 30px;
+  /* EDIT HERE: Gap between the main text and the buttons */
 }
 
-/* --- Buttons --- */
-.cta-buttons {
+/* Button Container */
+.hero-buttons {
   display: flex;
   gap: 20px;
+  /* EDIT HERE: Space between the "Projects" and "About Me" buttons */
 }
 
+/* Button Styling (Shared) */
 .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 125px;
+  /* EDIT HERE: Minimum width of the buttons */
   height: 52px;
+  /* EDIT HERE: Height of the buttons */
+  padding: 0 20px;
+
   background: #D9D9D9;
+  /* EDIT HERE: Button background color */
   border: 1px solid #000000;
+  /* EDIT HERE: Button border thickness and color */
   border-radius: 10px;
-  font-family: 'Poppins';
+  /* EDIT HERE: Roundness of button corners */
+
+  /* Text Styling */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   font-size: 22px;
+  /* EDIT HERE: Font size of button text */
   color: #000000;
-  cursor: pointer;
-  padding: 0 30px;
-  transition: all 0.2s ease;
+  /* EDIT HERE: Button text color */
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+  /* Makes hover effects smooth */
 }
 
+/* Hover Effects */
 .btn:hover {
-  background: #bfbfbf;
-  transform: translateY(-2px);
-}
-
-/* --- Right Side: Single Image --- */
-.hero-image-wrapper {
-  flex: 1;
-  /* Takes up equal space as text */
-  display: flex;
-  justify-content: flex-end;
-  /* Aligns image to the right */
-}
-
-.hero-gallery-img {
-  max-width: 100%;
-  /* Makes it responsive */
-  height: auto;
-  /* Maintains aspect ratio */
-  display: block;
-}
-
-/* --- Mobile Responsiveness (Optional addition) --- */
-@media (max-width: 1200px) {
-  h1 {
-    font-size: 70px;
-  }
-
-  .hero-text p {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 900px) {
-  .hero-container {
-    flex-direction: column-reverse;
-    /* Stacks image on top of text on mobile */
-    text-align: center;
-  }
-
-  .hero-image-wrapper {
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-
-  .cta-buttons {
-    justify-content: center;
-  }
-
-  nav {
-    display: none;
-  }
-
-  /* Hide nav links on small mobile for simplicity */
+  background: #000000;
+  /* EDIT HERE: Background color when hovering */
+  color: #FFFFFF;
+  /* EDIT HERE: Text color when hovering */
+  transform: translateY(-3px);
+  /* EDIT HERE: How much the button "lifts" up on hover */
 }
