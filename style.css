@@ -377,28 +377,91 @@ nav a:hover {
   color: var(--text-light);
 }
 
+/* --- Carousel Layout --- */
 .carousel-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 40px;
+  position: relative;
   width: 100%;
+  height: 450px;
+  /* Fixed height for the container */
+  margin-bottom: 40px;
+  overflow: hidden;
+  /* Hides cards when they move off-screen */
+  display: flex;
+  justify-content: center;
 }
 
+/* Base Card Style */
 .project-card {
-  background: var(--accent-gray);
-  border: 1px solid var(--text-main);
+  position: absolute;
+  /* Allows us to position them exactly */
+  top: 50%;
+  /* Center vertically */
+  left: 50%;
+  /* Center horizontally (we adjust this with transform) */
+  background: #D9D9D9;
+  border: 1px solid #000000;
   border-radius: 10px;
   overflow: hidden;
-  position: relative;
+
+  /* Smooth transitions for moving, resizing, and blurring */
+  transition: all 0.5s ease-in-out;
+
+  /* Default State (Hidden/Inactive cards) */
+  width: 0;
+  height: 0;
+  opacity: 0;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  /* Centers the element on its point */
 }
 
+/* Image styling */
 .card-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
+}
+
+/* --- Dynamic Classes (Added by JS) --- */
+
+/* --- Active Center Card --- */
+.project-card.active {
+  width: 710px;
+  /* Original Big Size */
+  height: 450px;
+  opacity: 1;
+  z-index: 10;
+  filter: blur(0);
+  /* Clear / No Blur */
+
+  /* Pins it exactly in the center */
+  transform: translate(-50%, -50%);
+}
+
+/* --- Left Side Card (Prev) --- */
+.project-card.prev {
+  width: 395px;
+  /* Original Small Size */
+  height: 426px;
+  opacity: 1;
+  /* Fully visible, just blurred */
+  z-index: 5;
+
+  /* MATH: Center(-50%) -> Move Left by (Half Center + Gap + Half Side) */
+  /* 355px + 40px + 197.5px = 592.5px */
+  transform: translate(-50%, -50%) translateX(-592.5px);
+}
+
+/* --- Right Side Card (Next) --- */
+.project-card.next {
+  width: 395px;
+  /* Original Small Size */
+  height: 426px;
+  opacity: 1;
+  z-index: 5;
+
+  /* MATH: Center(-50%) -> Move Right by 592.5px */
+  transform: translate(-50%, -50%) translateX(592.5px);
 }
 
 .main-card {
@@ -655,6 +718,17 @@ footer {
    9. MEDIA QUERIES (Responsive Logic)
    ========================================= */
 
+/* --- Responsive: Mobile & Laptop --- */
+@media (max-width: 1550px) {
+
+  /* On smaller screens, the side cards will overflow, so we hide them */
+  .project-card.prev,
+  .project-card.next {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 /* --- Standard Laptops (Max: 1400px) --- */
 @media (max-width: 1400px) {
   .profile-img {
@@ -813,6 +887,27 @@ footer {
 
   .project-controls {
     margin-top: 20px;
+  }
+
+  .project-card {
+    width: 90%;
+    /* On mobile, card takes mostly full width */
+    height: 300px;
+  }
+
+  .carousel-wrapper {
+    height: 300px;
+  }
+
+  .project-card.prev,
+  .project-card.next {
+    opacity: 0;
+    /* Hide side cards completely on mobile */
+  }
+
+  .project-card.active {
+    width: 90%;
+    height: 100%;
   }
 
   /* Disable absolute positioning for buttons on mobile so they stack safely */
