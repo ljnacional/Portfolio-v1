@@ -1024,3 +1024,97 @@ nav a:hover {
     height: 40px;
   }
 }
+
+/* --- Footer Section --- */
+
+footer {
+  width: 100%;
+  padding: 50px 0;
+  /* EDIT HERE: Top and Bottom padding */
+  background-color: #FFFFFF;
+  /* EDIT HERE: Background color */
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  /* EDIT HERE: Subtle top border line */
+  margin-top: 50px;
+  /* Ensures separation from the content above */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  /* Pushes Name left, Nav right */
+  align-items: center;
+  /* Vertically centers them */
+  flex-wrap: wrap;
+  /* Allows stacking on mobile */
+  gap: 30px;
+}
+
+/* --- Left Side --- */
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.footer-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  /* EDIT HERE: Size of your name */
+  color: #000000;
+}
+
+.built-with {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  /* EDIT HERE: Size of 'Built with' text */
+  color: rgba(0, 0, 0, 0.5);
+  /* Faded gray */
+}
+
+.built-with span {
+  font-weight: 600;
+  color: #000000;
+  /* Highlights the tool name */
+}
+
+/* --- Right Side: Nav --- */
+.footer-nav {
+  display: flex;
+  gap: 40px;
+  /* EDIT HERE: Space between links */
+}
+
+.footer-nav a {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  /* EDIT HERE: Link size */
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: rgba(0, 0, 0, 0.6);
+  /* EDIT HERE: Hover color */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    /* Stacks vertically on mobile */
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-nav {
+    gap: 20px;
+    /* Smaller gaps on mobile */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
