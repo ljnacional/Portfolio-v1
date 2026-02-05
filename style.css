@@ -542,3 +542,251 @@ nav a:hover {
 
   /* 2 cols on mobile */
 }
+
+/* --- Projects Section --- */
+
+.projects-section {
+  width: 100%;
+  padding-top: 100px;
+  /* EDIT HERE: Space above the section */
+  padding-bottom: 100px;
+  /* EDIT HERE: Space below the section */
+  text-align: center;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Header Text --- */
+.projects-header {
+  margin-bottom: 60px;
+  /* EDIT HERE: Space between the text and the carousel */
+  max-width: 1100px;
+}
+
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 110px;
+  /* EDIT HERE: Size of "PROJECTS" title */
+  line-height: 100%;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 30px;
+  /* EDIT HERE: Gap between Title and Subtitle */
+}
+
+.section-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  /* EDIT HERE: Size of the description text */
+  line-height: 120%;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* --- Carousel Layout --- */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  /* EDIT HERE: Space between the Main card and Side cards */
+  margin-bottom: 40px;
+  /* EDIT HERE: Space between Carousel and Bottom Controls */
+  width: 100%;
+}
+
+/* Shared Card Styling */
+.project-card {
+  background: #D9D9D9;
+  /* EDIT HERE: Card background color (visible if image fails) */
+  border: 1px solid #000000;
+  /* EDIT HERE: Card border color/thickness */
+  border-radius: 10px;
+  /* EDIT HERE: Roundness of corners */
+
+  overflow: hidden;
+  /* Clips the image to the border radius */
+  position: relative;
+}
+
+/* Image Styling */
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* EDIT HERE: 'cover' fills the box, 'contain' shows whole image */
+  display: block;
+}
+
+/* Main Center Card */
+.main-card {
+  width: 710px;
+  /* EDIT HERE: Width of the center card */
+  height: 450px;
+  /* EDIT HERE: Height of the center card */
+  z-index: 2;
+}
+
+/* Side Cards */
+.side-card {
+  width: 395px;
+  /* EDIT HERE: Width of side cards */
+  height: 426px;
+  /* EDIT HERE: Height of side cards */
+  opacity: 0.5;
+  /* EDIT HERE: Opacity (0.5 = 50% faded) */
+}
+
+/* --- Bottom Controls & Info --- */
+.project-controls {
+  position: relative;
+  /* Acts as the anchor for the absolute buttons */
+  width: 100%;
+  max-width: 710px;
+  /* Matches main card width */
+  margin-top: 20px;
+  padding: 0;
+  /* Remove padding to align perfectly with image edges */
+
+  /* Ensures the container has height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Text Details */
+.project-text {
+  width: 100%;
+  /* Forces text to take full available width */
+  text-align: left;
+}
+
+.project-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 10px;
+  line-height: 1;
+  margin-top: 10px;
+
+  /* IMPORTANT: Prevents the Title from overlapping the buttons */
+  /* 70px(btn) + 15px(gap) + 70px(btn) + 20px(safe space) = 175px */
+  padding-right: 175px;
+}
+
+.project-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 10px;
+
+  /* Ensures this text stretches full width */
+  width: 100%;
+}
+
+.project-tech {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+
+  /* Ensures this text stretches full width to the edge of the right arrow */
+  width: 100%;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  position: absolute;
+  /* Takes buttons out of the flow */
+  top: 0;
+  right: 0;
+  /* Pins them to the far right edge */
+
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  width: 70px;
+  /* EDIT HERE: Button width */
+  height: 70px;
+  /* EDIT HERE: Button height */
+  background: #D9D9D9;
+  /* EDIT HERE: Button background color */
+  border: 1px solid #000000;
+  border-radius: 10px;
+  /* EDIT HERE: Button corner roundness */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  /* This sets the default color of the SVG arrow */
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* UPDATED: Targets the SVG specifically */
+.nav-btn svg {
+  width: 24px;
+  /* EDIT HERE: Size of the Arrow Icon */
+  height: 24px;
+}
+
+.nav-btn:hover {
+  background: #000000;
+  /* EDIT HERE: Hover background color */
+  border-color: #000000;
+
+  /* This changes the SVG arrow color to white on hover */
+  color: #FFFFFF;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1400px) {
+  .side-card {
+    display: none;
+  }
+
+  /* Hides side cards on smaller laptops */
+  .section-title {
+    font-size: 80px;
+  }
+
+  .section-subtitle {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 50px;
+  }
+
+  .section-subtitle {
+    font-size: 20px;
+  }
+
+  .main-card {
+    width: 100%;
+    /* Makes main card full width on mobile */
+    height: 300px;
+  }
+
+  .project-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .project-text {
+    text-align: center;
+  }
+}
