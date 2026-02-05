@@ -216,3 +216,172 @@ nav a:hover {
   transform: translateY(-3px);
   /* EDIT HERE: How much the button "lifts" up on hover */
 }
+
+/* --- About Me Section --- */
+
+.about-section {
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+/* Master Container: Holds Image (Left) and Content (Right) */
+.about-container {
+  display: flex;
+  /* Enables side-by-side layout */
+  flex-direction: row;
+  /* Forces horizontal alignment */
+  align-items: center;
+  /* Vertically centers them */
+  justify-content: center;
+  /* Centers the whole group */
+  gap: 60px;
+  /* EDIT HERE: Space between Profile Pic and Text Cards */
+}
+
+/* --- Left Side: Profile Picture --- */
+.profile-img-wrapper {
+  /* Prevents the image from shrinking or growing */
+  flex: 0 0 auto;
+}
+
+.profile-img {
+  width: 601px;
+  /* Fixed width as requested */
+  height: 601px;
+  /* Fixed height as requested */
+  object-fit: cover;
+  border-radius: 50%;
+  /* Circle shape */
+  /* Optional: Adds shadow to match design depth */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Right Side: Text Cards --- */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  /* Stacks About Me on top of Education */
+  gap: 30px;
+  /* Space between the two cards */
+
+  /* KEY FIX: 'flex: 1' allows this column to take up remaining space */
+  /* This prevents it from being too wide and breaking to the next line */
+  flex: 1;
+  max-width: 900px;
+  /* Limits width so text lines aren't too long */
+}
+
+/* Shared Glass Card Style */
+.glass-card {
+  /* Matches Figma Gradient */
+  background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.9) 0%, #FFFFFF 77.08%, #FFFFFF 100%);
+
+  backdrop-filter: blur(40px);
+  border-radius: 50px;
+  padding: 40px 50px;
+  /* Inner padding */
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Typography inside Cards */
+.card-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.card-line {
+  border: none;
+  border-top: 0.5px solid #000000;
+  margin-bottom: 25px;
+  opacity: 0.3;
+  /* Makes the line subtle */
+}
+
+.about-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.8);
+  text-align: justify;
+}
+
+/* --- Education Specific Styles --- */
+.edu-item {
+  display: flex;
+  justify-content: space-between;
+  /* Pushes Year to the far right */
+  align-items: center;
+  /* Aligns Text and Year vertically */
+  margin-bottom: 30px;
+}
+
+.edu-item:last-child {
+  margin-bottom: 0;
+}
+
+.edu-info h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+.edu-info span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.edu-year {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+  text-align: right;
+  min-width: 150px;
+  /* Ensures year doesn't wrap */
+}
+
+/* --- Responsive Adjustments --- */
+/* On screens smaller than 1400px, shrink the image so layout stays side-by-side */
+@media (max-width: 1400px) {
+  .profile-img {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+/* On Mobile/Tablets (below 1024px), stack them vertically */
+@media (max-width: 1024px) {
+  .about-container {
+    flex-direction: column;
+    /* Stacks Image Top, Text Bottom */
+    text-align: center;
+  }
+
+  .profile-img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .edu-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .edu-year {
+    text-align: left;
+  }
+}
