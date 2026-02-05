@@ -1,4 +1,13 @@
-/* --- Global Reset & Basics --- */
+/* --- 1. Variables & Global Reset --- */
+:root {
+  --bg-color: #FFFFFF;
+  --text-main: #000000;
+  --text-dark: rgba(0, 0, 0, 0.8);
+  --text-light: rgba(0, 0, 0, 0.5);
+  --accent-gray: #D9D9D9;
+  --input-bg: #EBEBEB;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,29 +16,25 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #FFFFFF;
-  /* EDIT HERE: Change website background color */
-  color: #000000;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   overflow-x: hidden;
+  /* Prevents horizontal scrollbar */
 }
 
-/* MASTER CONTAINER */
+/* Handles Big Screens (1920px+) automatically */
 .container {
   max-width: 1620px;
-  /* EDIT HERE: Controls the maximum width of the content */
   margin: 0 auto;
   padding: 0 20px;
-  /* EDIT HERE: Side padding for smaller screens */
   width: 100%;
 }
 
-/* --- Header / Navbar --- */
+/* --- 2. Header / Navbar --- */
 header {
   width: 100%;
   padding-top: 30px;
-  /* CHANGED: 60px -> 30px (Matches Figma 'top: 30px') */
   margin-bottom: 50px;
-  /* This creates the gap before the Hero section */
   background-color: transparent;
 }
 
@@ -38,88 +43,65 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  /* ADD THIS LINE: Controls the specific height of the navbar content */
 }
 
 .logo {
-  font-weight: 400;
   font-size: 22px;
-  /* EDIT HERE: Size of "Luke Nacional" text */
-  color: #000000;
-  /* EDIT HERE: Color of the logo text */
+  font-weight: 400;
+  color: var(--text-main);
 }
 
-/* Navigation Links */
 nav {
   display: flex;
   gap: 50px;
-  /* EDIT HERE: Space between "Home", "About", etc. */
 }
 
 nav a {
   text-decoration: none;
-  color: #000000;
-  /* EDIT HERE: Link text color */
+  color: var(--text-main);
   font-size: 22px;
-  /* EDIT HERE: Link text size */
   font-weight: 400;
-  /* EDIT HERE: Link thickness (400=normal, 600=bold) */
   transition: color 0.3s ease;
-  /* Smooth hover effect */
 }
 
 nav a:hover {
   color: #555555;
-  /* EDIT HERE: Color when hovering over links */
 }
 
-/* --- SVG Icon Styling --- */
-.social-icons {
+/* Social Icons */
+.social-icons,
+.connect-icons {
   display: flex;
   gap: 30px;
-  /* EDIT HERE: Space between the LinkedIn and GitHub icons */
   align-items: center;
 }
 
-/* Shared styles for both SVGs */
+.lucide-linkedin,
+.lucide-github,
+.icon-box svg {
+  stroke: var(--text-main);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .lucide-linkedin,
 .lucide-github {
   width: 30px;
-  /* EDIT HERE: Change icon SIZE (width) */
   height: 30px;
-  /* EDIT HERE: Change icon SIZE (height) - keep same as width */
-
-  fill: none;
-  /* EDIT HERE: 'none' for outlined icons, or a color hex for filled icons */
-  stroke: #000000;
-  /* EDIT HERE: Change icon LINE COLOR */
-  stroke-width: 2;
-  /* EDIT HERE: Change line THICKNESS */
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  cursor: pointer;
-  transition: all 0.3s ease;
-  /* Enables smooth animation on hover */
 }
 
-/* Hover effect for SVGs */
 .social-icons a:hover svg {
   stroke: #555555;
-  /* EDIT HERE: Change line color when HOVERING */
   transform: scale(1.1);
-  /* EDIT HERE: Slightly zoom in on hover (remove to disable) */
 }
 
-/* --- Hero Section --- */
-
+/* --- 3. Hero Section --- */
 .hero-section {
-  width: 100%;
-  padding-top: 100px;
-  /* EDIT HERE: Increase this to push the hero section lower */
-  padding-bottom: 50px;
-  /* EDIT HERE: Space below the hero section */
-
+  padding: 100px 0 50px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -129,198 +111,131 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centers items horizontally */
   max-width: 1000px;
-  /* EDIT HERE: Maximum width of the entire hero content area */
 }
 
-/* "HELLO, I AM LUKE NACIONAL" */
 .hero-sub {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-
   font-size: 30px;
-  /* EDIT HERE: Size of the small top text */
-  color: rgba(0, 0, 0, 0.5);
-  /* EDIT HERE: Text color (0.5 is 50% opacity) */
-
+  font-weight: 400;
+  color: var(--text-light);
   text-transform: uppercase;
   margin-bottom: 30px;
-  /* EDIT HERE: Gap between this text and the big main text */
 }
 
-/* Main Description Text */
 .hero-main {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-
   font-size: 40px;
-  /* EDIT HERE: Size of the main headline */
+  font-weight: 600;
   line-height: 120%;
-  /* EDIT HERE: Spacing between lines of text */
-  color: rgba(0, 0, 0, 0.8);
-  /* EDIT HERE: Text color (0.8 is 80% opacity) */
-
-  text-align: center;
+  color: var(--text-dark);
   max-width: 800px;
-  /* EDIT HERE: Controls how wide the text block can get before wrapping */
   margin-bottom: 30px;
-  /* EDIT HERE: Gap between the main text and the buttons */
 }
 
-/* Button Container */
 .hero-buttons {
   display: flex;
   gap: 20px;
-  /* EDIT HERE: Space between the "Projects" and "About Me" buttons */
 }
 
-/* Button Styling (Shared) */
-.btn {
+.btn,
+.submit-btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-  min-width: 125px;
-  /* EDIT HERE: Minimum width of the buttons */
-  height: 52px;
-  /* EDIT HERE: Height of the buttons */
-  padding: 0 20px;
-
-  background: #D9D9D9;
-  /* EDIT HERE: Button background color */
-  border: 1px solid #000000;
-  /* EDIT HERE: Button border thickness and color */
   border-radius: 10px;
-  /* EDIT HERE: Roundness of button corners */
-
-  /* Text Styling */
-  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 22px;
-  /* EDIT HERE: Font size of button text */
-  color: #000000;
-  /* EDIT HERE: Button text color */
-  text-decoration: none;
-
   transition: all 0.3s ease;
-  /* Makes hover effects smooth */
+  cursor: pointer;
 }
 
-/* Hover Effects */
-.btn:hover {
-  background: #000000;
-  /* EDIT HERE: Background color when hovering */
+.btn {
+  min-width: 125px;
+  height: 52px;
+  padding: 0 20px;
+  background: var(--accent-gray);
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.btn:hover,
+.submit-btn:hover {
+  background: var(--text-main);
   color: #FFFFFF;
-  /* EDIT HERE: Text color when hovering */
   transform: translateY(-3px);
-  /* EDIT HERE: How much the button "lifts" up on hover */
 }
 
-/* --- About Me Section --- */
-
+/* --- 4. About Me Section --- */
 .about-section {
-  width: 100%;
-  padding-top: 100px;
-  padding-bottom: 50px;
+  padding: 100px 0 50px;
   position: relative;
 }
 
-/* Master Container: Holds Image (Left) and Content (Right) */
 .about-container {
   display: flex;
-  /* Enables side-by-side layout */
-  flex-direction: row;
-  /* Forces horizontal alignment */
   align-items: center;
-  /* Vertically centers them */
   justify-content: center;
-  /* Centers the whole group */
   gap: 60px;
-  /* EDIT HERE: Space between Profile Pic and Text Cards */
 }
 
-/* --- Left Side: Profile Picture --- */
 .profile-img-wrapper {
-  /* Prevents the image from shrinking or growing */
   flex: 0 0 auto;
 }
 
 .profile-img {
   width: 601px;
-  /* Fixed width as requested */
   height: 601px;
-  /* Fixed height as requested */
   object-fit: cover;
   border-radius: 50%;
-  /* Circle shape */
-  /* Optional: Adds shadow to match design depth */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Right Side: Text Cards --- */
 .about-content {
   display: flex;
   flex-direction: column;
-  /* Stacks About Me on top of Education */
   gap: 30px;
-  /* Space between the two cards */
-
-  /* KEY FIX: 'flex: 1' allows this column to take up remaining space */
-  /* This prevents it from being too wide and breaking to the next line */
   flex: 1;
   max-width: 900px;
-  /* Limits width so text lines aren't too long */
 }
 
-/* Shared Glass Card Style */
-.glass-card {
-  /* Matches Figma Gradient */
+.glass-card,
+.skill-box {
   background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.9) 0%, #FFFFFF 77.08%, #FFFFFF 100%);
-
   backdrop-filter: blur(40px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.glass-card {
   border-radius: 50px;
   padding: 40px 50px;
-  /* Inner padding */
-
-  border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Typography inside Cards */
 .card-title {
-  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 30px;
-  color: #000000;
   margin-bottom: 15px;
   text-transform: uppercase;
 }
 
 .card-line {
   border: none;
-  border-top: 0.5px solid #000000;
+  border-top: 0.5px solid var(--text-main);
   margin-bottom: 25px;
   opacity: 0.3;
-  /* Makes the line subtle */
 }
 
 .about-text {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
   font-size: 18px;
   line-height: 1.6;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--text-dark);
   text-align: justify;
 }
 
-/* --- Education Specific Styles --- */
 .edu-item {
   display: flex;
   justify-content: space-between;
-  /* Pushes Year to the far right */
   align-items: center;
-  /* Aligns Text and Year vertically */
   margin-bottom: 30px;
 }
 
@@ -329,44 +244,467 @@ nav a:hover {
 }
 
 .edu-info h4 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
   font-size: 22px;
-  color: #000000;
   margin-bottom: 5px;
+  font-weight: 600;
 }
 
 .edu-info span {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
   font-size: 18px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
 }
 
 .edu-year {
-  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 20px;
-  color: #000000;
   text-align: right;
   min-width: 150px;
-  /* Ensures year doesn't wrap */
 }
 
-/* --- Responsive Adjustments --- */
-/* On screens smaller than 1400px, shrink the image so layout stays side-by-side */
+/* --- 5. Skills Section --- */
+.skills-section {
+  padding: 100px 0;
+}
+
+.skills-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.skills-typography {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.role-text {
+  font-weight: 600;
+  font-size: 110px;
+  line-height: 1.1;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.role-text.highlight {
+  color: var(--text-main);
+}
+
+.skills-grid-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skills-title {
+  font-weight: 600;
+  font-size: 85px;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.skill-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 150px;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.skill-box:hover {
+  transform: translateY(-5px);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.icon-wrapper {
+  width: 88px;
+  height: 82px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.skill-box span {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-dark);
+}
+
+/* --- 6. Projects Section --- */
+.projects-section {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects-header {
+  margin-bottom: 60px;
+  max-width: 1100px;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 110px;
+  line-height: 100%;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+}
+
+.section-subtitle {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 120%;
+  color: var(--text-light);
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.project-card {
+  background: var(--accent-gray);
+  border: 1px solid var(--text-main);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.main-card {
+  width: 710px;
+  height: 450px;
+  z-index: 2;
+}
+
+.side-card {
+  width: 395px;
+  height: 426px;
+  opacity: 0.5;
+}
+
+.project-controls {
+  position: relative;
+  width: 100%;
+  max-width: 710px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-text {
+  width: 100%;
+  text-align: left;
+}
+
+.project-name {
+  font-weight: 600;
+  font-size: 30px;
+  margin: 10px 0;
+  line-height: 1;
+  padding-right: 175px;
+}
+
+.project-label {
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.project-tech {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-light);
+  width: 100%;
+}
+
+.nav-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  width: 70px;
+  height: 70px;
+  background: var(--accent-gray);
+  border: 1px solid var(--text-main);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-dark);
+}
+
+.nav-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-btn:hover {
+  background: var(--text-main);
+  color: #FFFFFF;
+}
+
+/* --- 7. Contact Section --- */
+.contact-section {
+  padding: 100px 0 150px;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.contact-left {
+  flex: 1;
+  max-width: 800px;
+  min-width: 300px;
+}
+
+.contact-title {
+  font-weight: 600;
+  font-size: 95px;
+  line-height: 100%;
+  color: var(--text-dark);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--text-dark);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: var(--input-bg);
+  border: 0.5px solid var(--text-main);
+  border-radius: 5px;
+  font-size: 20px;
+  color: var(--text-main);
+  padding: 15px;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  height: 150px;
+  resize: none;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 50px;
+  background: var(--text-dark);
+  border: 0.5px solid var(--text-main);
+  color: #FFFFFF;
+  margin-top: 10px;
+}
+
+.contact-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 50px;
+}
+
+.connect-text h2 {
+  font-weight: 600;
+  font-size: 110px;
+  line-height: 100%;
+  margin: 0;
+}
+
+.lets {
+  color: var(--text-dark);
+}
+
+.connect {
+  color: var(--text-main);
+}
+
+.connect-icons {
+  margin-top: 40px;
+}
+
+.icon-box {
+  color: var(--text-main);
+  transition: transform 0.2s ease;
+}
+
+.icon-box svg {
+  width: 88px;
+  height: 82px;
+  stroke-width: 2;
+}
+
+.icon-box:hover {
+  transform: translateY(-5px);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* --- 8. Footer Section --- */
+footer {
+  width: 100%;
+  padding: 50px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.footer-name {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.built-with {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--text-light);
+}
+
+.built-with span {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 40px;
+}
+
+.footer-nav a {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================
+   9. MEDIA QUERIES (Responsive Logic)
+   ========================================= */
+
+/* --- Standard Laptops (Max: 1400px) --- */
 @media (max-width: 1400px) {
   .profile-img {
     width: 450px;
     height: 450px;
   }
+
+  .side-card {
+    display: none;
+  }
+
+  /* Hide carousel sides */
+  .section-title {
+    font-size: 80px;
+  }
+
+  .section-subtitle {
+    font-size: 30px;
+  }
+
+  .nav-buttons {
+    position: absolute;
+  }
+
+  /* Keep absolute on laptops */
 }
 
-/* On Mobile/Tablets (below 1024px), stack them vertically */
+/* --- Small Laptops / Tablets (Max: 1200px) --- */
+@media (max-width: 1200px) {
+  .role-text {
+    font-size: 60px;
+  }
+
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-title {
+    font-size: 70px;
+  }
+
+  .connect-text h2 {
+    font-size: 80px;
+  }
+}
+
+/* --- Tablets / iPad (Max: 1024px) --- */
 @media (max-width: 1024px) {
   .about-container {
     flex-direction: column;
-    /* Stacks Image Top, Text Bottom */
     text-align: center;
   }
 
@@ -384,147 +722,72 @@ nav a:hover {
   .edu-year {
     text-align: left;
   }
-}
 
-/* --- Skills Section --- */
-
-.skills-section {
-  width: 100%;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  position: relative;
-}
-
-.skills-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 50px;
-  flex-wrap: wrap;
-}
-
-/* --- Left Side: Typography --- */
-.skills-typography {
-  text-align: left;
-  flex: 1;
-  min-width: 300px;
-  /* Prevents text from squishing too much */
-}
-
-.role-text {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 110px;
-  /* Matches visual weight */
-  line-height: 1.1;
-  color: rgba(0, 0, 0, 0.8);
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.role-text.highlight {
-  color: #000000;
-  /* Fully black for ARCHITECT */
-}
-
-/* --- Right Side: Bento Grid --- */
-.skills-grid-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.skills-title {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 85px;
-  color: rgba(0, 0, 0, 0.8);
-  text-transform: uppercase;
-}
-
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  /* 4 columns */
-  gap: 20px;
-}
-
-/* --- Skill Box Styling --- */
-.skill-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 170px;
-  height: 150px;
-
-  /* Glassmorphism Background */
-  background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 77.08%, rgba(0, 0, 0, 0.05) 100%);
-  backdrop-filter: blur(40px);
-  border-radius: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-
-  transition: transform 0.2s ease;
-  cursor: default;
-}
-
-.skill-box:hover {
-  transform: translateY(-5px);
-  background: rgba(0, 0, 0, 0.08);
-}
-
-/* --- SVG Icon Sizing --- */
-/* Wrapper ensures SVGs stay centered and sized correctly */
-.icon-wrapper {
-  width: 88px;
-  /* Fixed size for all icons */
-  height: 82px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.icon-wrapper svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Placeholder Icon Styling (FontAwesome) */
-.placeholder-icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-  color: #333;
-  opacity: 0.5;
-}
-
-/* Text Label */
-.skill-box span {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 1200px) {
-  .role-text {
-    font-size: 60px;
-  }
-
-  .bento-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* 3 cols on laptop */
-}
-
-@media (max-width: 768px) {
-  .skills-container {
+  .contact-container {
     flex-direction: column;
+  }
+
+  .contact-left,
+  .contact-right {
+    max-width: 100%;
+    padding-left: 0;
+  }
+
+  .contact-right {
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .connect-text {
     text-align: center;
+  }
+
+  /* Navbar adjustments */
+  nav {
+    gap: 30px;
+  }
+
+  nav a {
+    font-size: 18px;
+  }
+}
+
+/* --- Standard Mobile (Max: 768px) --- */
+@media (max-width: 768px) {
+
+  /* Header */
+  .nav-container {
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  nav {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+  }
+
+  /* Typography Scaling */
+  .hero-main {
+    font-size: 32px;
+  }
+
+  .section-title {
+    font-size: 50px;
+  }
+
+  .section-subtitle {
+    font-size: 20px;
   }
 
   .skills-typography {
@@ -536,481 +799,48 @@ nav a:hover {
     font-size: 50px;
   }
 
+  /* Skills Grid */
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 
-  /* 2 cols on mobile */
-}
-
-/* --- Projects Section --- */
-
-.projects-section {
-  width: 100%;
-  padding-top: 100px;
-  /* EDIT HERE: Space above the section */
-  padding-bottom: 100px;
-  /* EDIT HERE: Space below the section */
-  text-align: center;
-}
-
-.projects-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* --- Header Text --- */
-.projects-header {
-  margin-bottom: 60px;
-  /* EDIT HERE: Space between the text and the carousel */
-  max-width: 1100px;
-}
-
-.section-title {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 110px;
-  /* EDIT HERE: Size of "PROJECTS" title */
-  line-height: 100%;
-  color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 30px;
-  /* EDIT HERE: Gap between Title and Subtitle */
-}
-
-.section-subtitle {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 40px;
-  /* EDIT HERE: Size of the description text */
-  line-height: 120%;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-/* --- Carousel Layout --- */
-.carousel-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  /* EDIT HERE: Space between the Main card and Side cards */
-  margin-bottom: 40px;
-  /* EDIT HERE: Space between Carousel and Bottom Controls */
-  width: 100%;
-}
-
-/* Shared Card Styling */
-.project-card {
-  background: #D9D9D9;
-  /* EDIT HERE: Card background color (visible if image fails) */
-  border: 1px solid #000000;
-  /* EDIT HERE: Card border color/thickness */
-  border-radius: 10px;
-  /* EDIT HERE: Roundness of corners */
-
-  overflow: hidden;
-  /* Clips the image to the border radius */
-  position: relative;
-}
-
-/* Image Styling */
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  /* EDIT HERE: 'cover' fills the box, 'contain' shows whole image */
-  display: block;
-}
-
-/* Main Center Card */
-.main-card {
-  width: 710px;
-  /* EDIT HERE: Width of the center card */
-  height: 450px;
-  /* EDIT HERE: Height of the center card */
-  z-index: 2;
-}
-
-/* Side Cards */
-.side-card {
-  width: 395px;
-  /* EDIT HERE: Width of side cards */
-  height: 426px;
-  /* EDIT HERE: Height of side cards */
-  opacity: 0.5;
-  /* EDIT HERE: Opacity (0.5 = 50% faded) */
-}
-
-/* --- Bottom Controls & Info --- */
-.project-controls {
-  position: relative;
-  /* Acts as the anchor for the absolute buttons */
-  width: 100%;
-  max-width: 710px;
-  /* Matches main card width */
-  margin-top: 20px;
-  padding: 0;
-  /* Remove padding to align perfectly with image edges */
-
-  /* Ensures the container has height */
-  display: flex;
-  flex-direction: column;
-}
-
-/* Text Details */
-.project-text {
-  width: 100%;
-  /* Forces text to take full available width */
-  text-align: left;
-}
-
-.project-name {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  color: #000000;
-  margin-bottom: 10px;
-  line-height: 1;
-  margin-top: 10px;
-
-  /* IMPORTANT: Prevents the Title from overlapping the buttons */
-  /* 70px(btn) + 15px(gap) + 70px(btn) + 20px(safe space) = 175px */
-  padding-right: 175px;
-}
-
-.project-label {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 10px;
-
-  /* Ensures this text stretches full width */
-  width: 100%;
-}
-
-.project-tech {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  color: rgba(0, 0, 0, 0.5);
-
-  /* Ensures this text stretches full width to the edge of the right arrow */
-  width: 100%;
-}
-
-/* Navigation Buttons */
-.nav-buttons {
-  position: absolute;
-  /* Takes buttons out of the flow */
-  top: 0;
-  right: 0;
-  /* Pins them to the far right edge */
-
-  display: flex;
-  gap: 15px;
-}
-
-.nav-btn {
-  width: 70px;
-  /* EDIT HERE: Button width */
-  height: 70px;
-  /* EDIT HERE: Button height */
-  background: #D9D9D9;
-  /* EDIT HERE: Button background color */
-  border: 1px solid #000000;
-  border-radius: 10px;
-  /* EDIT HERE: Button corner roundness */
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  /* This sets the default color of the SVG arrow */
-  color: rgba(0, 0, 0, 0.8);
-}
-
-/* UPDATED: Targets the SVG specifically */
-.nav-btn svg {
-  width: 24px;
-  /* EDIT HERE: Size of the Arrow Icon */
-  height: 24px;
-}
-
-.nav-btn:hover {
-  background: #000000;
-  /* EDIT HERE: Hover background color */
-  border-color: #000000;
-
-  /* This changes the SVG arrow color to white on hover */
-  color: #FFFFFF;
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 1400px) {
-  .side-card {
-    display: none;
-  }
-
-  /* Hides side cards on smaller laptops */
-  .section-title {
-    font-size: 80px;
-  }
-
-  .section-subtitle {
-    font-size: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 50px;
-  }
-
-  .section-subtitle {
-    font-size: 20px;
-  }
-
+  /* Projects */
   .main-card {
     width: 100%;
-    /* Makes main card full width on mobile */
     height: 300px;
   }
 
   .project-controls {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    margin-top: 20px;
+  }
+
+  /* Disable absolute positioning for buttons on mobile so they stack safely */
+  .nav-buttons {
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    top: auto;
+    right: auto;
+    margin-top: 20px;
+  }
+
+  .project-name {
+    padding-right: 0;
     text-align: center;
   }
 
   .project-text {
     text-align: center;
-  }
-}
-
-/* --- Contact Section --- */
-
-.contact-section {
-  width: 100%;
-  padding-top: 100px;
-  /* EDIT HERE: Space above section */
-  padding-bottom: 150px;
-  /* EDIT HERE: Space below section */
-  background: #FFFFFF;
-}
-
-.contact-container {
-  display: flex;
-  justify-content: space-between;
-  /* Pushes form left and text right */
-  gap: 50px;
-  /* EDIT HERE: Gap between the two columns */
-  flex-wrap: wrap;
-  /* Allows stacking on mobile */
-}
-
-/* --- Left Side: Form --- */
-.contact-left {
-  flex: 1;
-  max-width: 800px;
-  /* Limits the width of the form area */
-  min-width: 300px;
-}
-
-.contact-title {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 95px;
-  /* EDIT HERE: Size of "CONTACT ME" title */
-  line-height: 100%;
-  color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 40px;
-  /* EDIT HERE: Space below the title */
-  text-transform: uppercase;
-}
-
-/* Form Styles */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  /* EDIT HERE: Space between input fields */
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.form-group label {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  /* EDIT HERE: Label text size */
-  color: rgba(0, 0, 0, 0.8);
-}
-
-/* Shared Input Styling */
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  background: #EBEBEB;
-  /* EDIT HERE: Input background color */
-  border: 0.5px solid #000000;
-  /* EDIT HERE: Input border */
-  border-radius: 5px;
-  /* EDIT HERE: Input corner radius */
-
-  font-family: 'Poppins', sans-serif;
-  font-size: 20px;
-  /* EDIT HERE: Input text size */
-  color: #000000;
-
-  padding: 15px;
-  /* EDIT HERE: Inner spacing of inputs */
-  outline: none;
-}
-
-.form-group textarea {
-  height: 150px;
-  /* EDIT HERE: Height of the message box */
-  resize: none;
-  /* Prevents user from resizing */
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: rgba(0, 0, 0, 0.5);
-  /* Placeholder text color */
-}
-
-/* Submit Button */
-.submit-btn {
-  width: 100%;
-  /* Makes button fill the width */
-  height: 50px;
-  background: rgba(0, 0, 0, 0.8);
-  /* EDIT HERE: Button background color */
-  border: 0.5px solid #000000;
-  border-radius: 5px;
-
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  /* EDIT HERE: Button text size */
-  color: #FFFFFF;
-  /* EDIT HERE: Button text color */
-
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-
-.submit-btn:hover {
-  background: #000000;
-  /* Darkens on hover */
-}
-
-/* --- Right Side: Let's Connect --- */
-.contact-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* Vertically centers the content */
-  align-items: flex-start;
-  /* Aligns text to the left relative to this column */
-  padding-left: 50px;
-  /* EDIT HERE: Space separating it from the form */
-}
-
-.connect-text h2 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 110px;
-  /* EDIT HERE: Size of large text */
-  line-height: 100%;
-  margin: 0;
-}
-
-.lets {
-  color: rgba(0, 0, 0, 0.8);
-  /* Faded black */
-}
-
-.connect {
-  color: #000000;
-  /* Solid black */
-}
-
-/* Icons */
-.connect-icons {
-  display: flex;
-  gap: 30px;
-  /* EDIT HERE: Space between icons */
-  margin-top: 40px;
-  /* EDIT HERE: Space between text and icons */
-}
-
-.icon-box {
-  color: #000000;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.icon-box svg {
-  width: 88px;
-  /* EDIT HERE: Icon size */
-  height: 82px;
-  stroke-width: 2;
-  /* Thickness of the icon lines */
-}
-
-.icon-box:hover {
-  transform: translateY(-5px);
-  /* Lifts up on hover */
-  color: rgba(0, 0, 0, 0.6);
-  /* Optional hover color change */
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 1200px) {
-  .contact-title {
-    font-size: 70px;
+    padding-right: 0;
   }
 
-  .connect-text h2 {
-    font-size: 80px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .contact-container {
-    flex-direction: column;
-    /* Stack vertically on mobile */
-  }
-
-  .contact-left,
-  .contact-right {
-    max-width: 100%;
-    padding-left: 0;
-  }
-
-  .contact-right {
-    align-items: center;
-    /* Center "Let's Connect" on mobile */
-    margin-top: 50px;
-  }
-
-  .connect-text {
+  .project-label,
+  .project-tech {
     text-align: center;
   }
-}
 
-@media (max-width: 768px) {
+  /* Contact */
   .contact-title {
     font-size: 50px;
   }
@@ -1020,101 +850,96 @@ nav a:hover {
   }
 
   .icon-box svg {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
-}
 
-/* --- Footer Section --- */
-
-footer {
-  width: 100%;
-  padding: 50px 0;
-  /* EDIT HERE: Top and Bottom padding */
-  background-color: #FFFFFF;
-  /* EDIT HERE: Background color */
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  /* EDIT HERE: Subtle top border line */
-  margin-top: 50px;
-  /* Ensures separation from the content above */
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  /* Pushes Name left, Nav right */
-  align-items: center;
-  /* Vertically centers them */
-  flex-wrap: wrap;
-  /* Allows stacking on mobile */
-  gap: 30px;
-}
-
-/* --- Left Side --- */
-.footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.footer-name {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  /* EDIT HERE: Size of your name */
-  color: #000000;
-}
-
-.built-with {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  /* EDIT HERE: Size of 'Built with' text */
-  color: rgba(0, 0, 0, 0.5);
-  /* Faded gray */
-}
-
-.built-with span {
-  font-weight: 600;
-  color: #000000;
-  /* Highlights the tool name */
-}
-
-/* --- Right Side: Nav --- */
-.footer-nav {
-  display: flex;
-  gap: 40px;
-  /* EDIT HERE: Space between links */
-}
-
-.footer-nav a {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  /* EDIT HERE: Link size */
-  color: #000000;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-nav a:hover {
-  color: rgba(0, 0, 0, 0.6);
-  /* EDIT HERE: Hover color */
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
+  /* Footer */
   .footer-container {
     flex-direction: column;
-    /* Stacks vertically on mobile */
     align-items: center;
     text-align: center;
   }
 
   .footer-nav {
     gap: 20px;
-    /* Smaller gaps on mobile */
     flex-wrap: wrap;
     justify-content: center;
+  }
+}
+
+/* --- iPhone SE / Small Mobile (Max: 380px) --- */
+@media (max-width: 380px) {
+
+  /* Tighter Header */
+  .nav-container {
+    padding: 0 10px;
+  }
+
+  nav a {
+    font-size: 16px;
+  }
+
+  /* Hero */
+  .hero-main {
+    font-size: 28px;
+  }
+
+  .btn {
+    min-width: 110px;
+    font-size: 18px;
+    padding: 0 15px;
+  }
+
+  /* About */
+  .profile-img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+
+  .glass-card {
+    padding: 30px 20px;
+  }
+
+  /* Skills */
+  .role-text {
+    font-size: 40px;
+  }
+
+  .skills-title {
+    font-size: 50px;
+  }
+
+  /* Shrink skill boxes to fit 2 cols */
+  .skill-box {
+    width: 135px;
+    height: 135px;
+  }
+
+  /* Projects */
+  .section-title {
+    font-size: 40px;
+  }
+
+  .main-card {
+    height: 220px;
+  }
+
+  /* Contact */
+  .contact-title {
+    font-size: 40px;
+  }
+
+  .connect-text h2 {
+    font-size: 45px;
+  }
+
+  .icon-box svg {
+    width: 40px;
+    height: 40px;
   }
 }
