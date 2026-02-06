@@ -17,45 +17,26 @@
 
       <nav>
         <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact Me</a>
-        <a href="#">Projects</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact Me</a>
       </nav>
 
-      <div class="social-icons">
-        <a href="#">
-          <svg viewBox="0 0 24 24" class="lucide-linkedin">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect width="4" height="12" x="2" y="9" />
-            <circle cx="4" cy="4" r="2" />
-          </svg>
-        </a>
-
-        <a href="#">
-          <svg viewBox="0 0 24 24" class="lucide lucide-github-icon lucide-github">
-            <path
-              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-            <path d="M9 18c-4.51 2-5-2-7-2" />
-          </svg>
-        </a>
+      <div id="social-container" class="social-icons">
+        
       </div>
     </div>
   </header>
 
   <section class="hero-section">
     <div class="container hero-container">
-
-      <h2 class="hero-sub">HELLO, I AM LUKE NACIONAL</h2>
-
-      <h1 class="hero-main">
-        Translating creative concepts into responsive, high-performance interfaces using modern web frameworks.
-      </h1>
+      <h2 id="hero-greeting" class="hero-sub">Loading...</h2>
+      <h1 id="hero-headline" class="hero-main">Loading...</h1>
 
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">Projects</a>
-        <a href="#about" class="btn btn-secondary">About Me</a>
+        <a id="hero-btn-primary" href="#projects" class="btn btn-primary">Loading...</a>
+        <a id="hero-btn-secondary" href="#about" class="btn btn-secondary">Loading...</a>
       </div>
-
     </div>
   </section>
 
@@ -63,50 +44,27 @@
     <div class="container about-container">
 
       <div class="profile-img-wrapper">
-        <img src="/Images/Profile Picture.png" alt="Luke Nacional" class="profile-img">
+        <img id="profile-img" src="" alt="Luke Nacional" class="profile-img">
       </div>
 
       <div class="about-content">
-
         <div class="glass-card about-card">
           <h3 class="card-title">ABOUT ME</h3>
           <hr class="card-line">
-          <p class="about-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur.
-          </p>
+          <p id="about-bio" class="about-text"></p>
         </div>
 
-        <div class="glass-card education-card">
+        <div id="education-list" class="glass-card education-card">
           <h3 class="card-title">EDUCATION</h3>
           <hr class="card-line">
-
-          <div class="edu-item">
-            <div class="edu-info">
-              <h4>University of the East - Manila</h4>
-              <span>3rd Year College</span>
-            </div>
-            <span class="edu-year">2023 - Present</span>
-          </div>
-
-          <div class="edu-item">
-            <div class="edu-info">
-              <h4>La Salle College of Antipolo</h4>
-              <span>Secondary Education</span>
-            </div>
-            <span class="edu-year">2021 - 2023</span>
-          </div>
-
         </div>
       </div>
+
     </div>
   </section>
 
   <section id="skills" class="skills-section">
     <div class="container skills-container">
-
       <div class="skills-typography">
         <h2 class="role-text">DESIGNER</h2>
         <h2 class="role-text highlight">ARCHITECT</h2>
@@ -116,155 +74,15 @@
       <div class="skills-grid-wrapper">
         <h2 class="skills-title">SKILLS</h2>
 
-        <div class="bento-grid">
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 28L4 3H28L26 28L16 31L6 28Z" fill="#E44D26" />
-                <path d="M26 5H16V29.5L24 27L26 5Z" fill="#F16529" />
-                <path
-                  d="M9.5 17.5L8.5 8H24L23.5 11H11.5L12 14.5H23L22 24L16 26L10 24L9.5 19H12.5L13 21.5L16 22.5L19 21.5L19.5 17.5H9.5Z"
-                  fill="white" />
-              </svg>
-            </div>
-            <span>HTML 5</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 512 512" aria-label="CSS3" role="img">
-                <path fill="#264de4" d="M72 460L30 0h451l-41 460-184 52" />
-                <path fill="#2965f1" d="M256 37V472l149-41 35-394" />
-                <path fill="#ebebeb" d="m114 94h142v56H119m5 58h132v57H129m3 28h56l4 45 64 17v59L139 382" />
-                <path fill="#ffffff" d="m256 208v57h69l-7 73-62 17v59l115-32 26-288H256v56h80l-5.5 58Z" />
-              </svg>
-            </div>
-            <span>CSS</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                  <path d="M0,0 L256,0 L256,256 L0,256 L0,0 Z" fill="#F7DF1E"></path>
-                  <path
-                    d="M67.311746,213.932292 L86.902654,202.076241 C90.6821079,208.777346 94.1202286,214.447137 102.367086,214.447137 C110.272203,214.447137 115.256076,211.354819 115.256076,199.326883 L115.256076,117.528787 L139.313575,117.528787 L139.313575,199.666997 C139.313575,224.58433 124.707759,235.925943 103.3984,235.925943 C84.1532952,235.925943 72.9819429,225.958603 67.3113397,213.93026"
-                    fill="#000000"></path>
-                  <path
-                    d="M152.380952,211.354413 L171.969422,200.0128 C177.125994,208.433981 183.827911,214.619835 195.684368,214.619835 C205.652521,214.619835 212.009041,209.635962 212.009041,202.762159 C212.009041,194.513676 205.479416,191.592025 194.481168,186.78207 L188.468419,184.202565 C171.111213,176.81473 159.597308,167.53534 159.597308,147.944838 C159.597308,129.901308 173.344508,116.153295 194.825752,116.153295 C210.119924,116.153295 221.117765,121.48094 229.021663,135.400432 L210.29059,147.428775 C206.166146,140.040127 201.699556,137.119289 194.826159,137.119289 C187.78047,137.119289 183.312254,141.587098 183.312254,147.428775 C183.312254,154.646349 187.78047,157.568406 198.089956,162.036622 L204.103924,164.614095 C224.553448,173.378641 236.067352,182.313448 236.067352,202.418387 C236.067352,224.071924 219.055137,235.927975 196.200432,235.927975 C173.860978,235.927975 159.425829,225.274311 152.381359,211.354413"
-                    fill="#000000"></path>
-                </g>
-              </svg>
-            </div>
-            <span>Javascript</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                  <path
-                    d="M0,222.991225 C0,241.223474 14.7785318,256 33.0087747,256 L222.991225,256 C241.223474,256 256,241.221468 256,222.991225 L256,33.0087747 C256,14.7765263 241.221468,0 222.991225,0 L33.0087747,0 C14.7765263,0 0,14.7785318 0,33.0087747 L0,222.991225 Z"
-                    fill="#563D7C"></path>
-                  <path
-                    d="M106.157563,113.238095 L106.157563,76.9845938 L138.069328,76.9845938 C141.108559,76.9845938 144.039202,77.2378593 146.861345,77.7443978 C149.683488,78.2509362 152.179961,79.1554557 154.35084,80.4579832 C156.52172,81.7605107 158.258397,83.5695496 159.560924,85.8851541 C160.863452,88.2007585 161.514706,91.1675823 161.514706,94.7857143 C161.514706,101.298352 159.560944,106.001853 155.653361,108.896359 C151.745779,111.790864 146.752832,113.238095 140.67437,113.238095 L106.157563,113.238095 L106.157563,113.238095 Z M72.07493,50.5 L72.07493,205.5 L147.186975,205.5 C154.133788,205.5 160.899594,204.631661 167.484594,202.894958 C174.069594,201.158255 179.93088,198.480877 185.068627,194.862745 C190.206375,191.244613 194.294803,186.577293 197.334034,180.860644 C200.373264,175.143996 201.892857,168.37819 201.892857,160.563025 C201.892857,150.866431 199.541107,142.581033 194.837535,135.706583 C190.133963,128.832132 183.00635,124.020088 173.454482,121.270308 C180.401295,117.941627 185.647508,113.672295 189.193277,108.462185 C192.739047,103.252075 194.511905,96.7395349 194.511905,88.9243697 C194.511905,81.6881057 193.317939,75.6097352 190.929972,70.6890756 C188.542005,65.7684161 185.177193,61.8247114 180.835434,58.8578431 C176.493676,55.8909749 171.283644,53.756309 165.205182,52.4537815 C159.12672,51.151254 152.397096,50.5 145.016106,50.5 L72.07493,50.5 L72.07493,50.5 Z M106.157563,179.015406 L106.157563,136.466387 L143.279412,136.466387 C150.660401,136.466387 156.594049,138.166883 161.080532,141.567927 C165.567016,144.968971 167.810224,150.649353 167.810224,158.609244 C167.810224,162.661552 167.122789,165.990183 165.747899,168.595238 C164.373009,171.200293 162.527789,173.262597 160.212185,174.782213 C157.89658,176.301828 155.219203,177.387252 152.179972,178.038515 C149.140741,178.689779 145.956833,179.015406 142.628151,179.015406 L106.157563,179.015406 L106.157563,179.015406 Z"
-                    fill="#FFFFFF"></path>
-                </g>
-              </svg>
-            </div>
-            <span>Bootstrap</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
-          <div class="skill-box glass-card-small">
-            <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="4" fill="#D9D9D9" />
-                <path d="M7 7h10v2H7zM7 11h10v2H7zM7 15h7v2H7z" fill="#999" />
-              </svg>
-            </div>
-            <span>Add Skill</span>
-          </div>
-
+        <div id="skills-list" class="bento-grid">
         </div>
-      </div>
 
+      </div>
     </div>
   </section>
 
   <section id="projects" class="projects-section">
     <div class="container projects-container">
-
       <div class="projects-header">
         <h2 class="section-title">PROJECTS</h2>
         <p class="section-subtitle">
@@ -272,48 +90,24 @@
         </p>
       </div>
 
-      <div class="carousel-wrapper">
-
-        <div class="project-card" data-index="0">
-          <img src="/Images/image.svg" alt="Project 1" class="card-img">
-        </div>
-
-        <div class="project-card" data-index="1">
-          <img src="/Images/image.svg" alt="Project 2" class="card-img">
-        </div>
-
-        <div class="project-card" data-index="2">
-          <img src="/Images/image.svg" alt="Project 3" class="card-img">
-        </div>
-
+      <div id="carousel-wrapper" class="carousel-wrapper">
       </div>
 
       <div class="project-controls">
-
         <div class="project-text">
-          <h3 id="project-title" class="project-name">1. QUANTA PC</h3>
+          <h3 id="project-title" class="project-name">Loading...</h3>
           <h4 class="project-label">Tools and features</h4>
-          <p id="project-details" class="project-tech">TailwindCSS, Supabase, React</p>
+          <p id="project-details" class="project-tech">Loading...</p>
         </div>
 
         <div class="nav-buttons">
           <button id="prevBtn" class="nav-btn">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 12H5"></path>
-              <path d="M12 19l-7-7 7-7"></path>
-            </svg>
+            <img src="/Images/arrow-left.svg" alt="Previous">
           </button>
-
           <button id="nextBtn" class="nav-btn">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14"></path>
-              <path d="M12 5l7 7-7 7"></path>
-            </svg>
+            <img src="/Images/arrow-right.svg" alt="Next">
           </button>
         </div>
-
       </div>
 
     </div>
@@ -321,87 +115,59 @@
 
   <section id="contact" class="contact-section">
     <div class="container contact-container">
-
       <div class="contact-left">
         <h2 class="contact-title">CONTACT ME</h2>
-
         <form class="contact-form">
-
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" placeholder="Juan Dela Cruz">
           </div>
-
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="juandelacruz1@gmail.com">
           </div>
-
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" placeholder="How can I help you?"></textarea>
           </div>
-
           <button type="submit" class="submit-btn">Submit Message</button>
-
         </form>
       </div>
 
       <div class="contact-right">
-
         <div class="connect-text">
           <h2 class="lets">LET’S</h2>
           <h2 class="connect">CONNECT</h2>
         </div>
-
         <div class="connect-icons">
           <a href="#" class="icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path
-                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-              <path d="M9 18c-4.51 2-5-2-7-2" />
-            </svg>
+            <img src="/Images/github.svg" alt="Github">
           </a>
-
           <a href="#" class="icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-              <rect width="4" height="12" x="2" y="9" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
+            <img src="/Images/linkedin.svg" alt="LinkedIn">
           </a>
-
           <a href="#" class="icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-            </svg>
+            <img src="/Images/mail.svg" alt="Email">
           </a>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <footer>
     <div class="container footer-container">
-
       <div class="footer-left">
         <h3 class="footer-name">Luke Nacional</h3>
-        <p class="built-with">Built with <span>[Insert Tool Here]</span></p>
+        <p id="copyright-text" class="built-with">
+          &copy; <span id="current-year"></span> Built with <span>HTML, CSS, JS</span>
+        </p>
       </div>
-
       <nav class="footer-nav">
         <a href="#">Home</a>
         <a href="#about">About</a>
         <a href="#contact">Contact Me</a>
         <a href="#projects">Projects</a>
       </nav>
-
     </div>
   </footer>
 
