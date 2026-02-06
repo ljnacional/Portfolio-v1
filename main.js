@@ -1,7 +1,7 @@
 // main.js
 
 // 1. IMPORT ALL DATA (Added contactData)
-import { heroData, aboutData, skillsData, projectData, contactData, socialLinks } from './data.js';
+import { heroData, aboutData, skillsData, projectData, contactData, socialLinks, uiIcons } from './data.js';
 
 /* =========================================
    2. SELECT DOM ELEMENTS
@@ -25,6 +25,7 @@ const skillsContainer = document.querySelector('#skills-list');
 // Projects (Carousel)
 const carouselWrapper = document.querySelector('#carousel-wrapper');
 const projectTitle = document.querySelector('#project-title');
+const projectTextContainer = document.querySelector('.project-text');
 const projectDetails = document.querySelector('#project-details');
 const prevBtn = document.querySelector('#prevBtn');
 const nextBtn = document.querySelector('#nextBtn');
@@ -49,8 +50,11 @@ const currentYearSpan = document.querySelector('#current-year');
 /* =========================================
    3. STATE VARIABLES
    ========================================= */
-let currentIndex = 0;
-let cards = [];
+let track;
+let isAnimating = false;
+const cardWidth = 710;
+const gap = 60;
+const step = cardWidth + gap; // 770px
 
 
 /* =========================================
@@ -157,18 +161,40 @@ const initSkills = () => {
     createMarquee(secondRowData, 'scroll-right');
 };
 
+// --- Build UI Icons ---
+const initUI = () => {
+    if (prevBtn) prevBtn.innerHTML = uiIcons.arrowLeft;
+    if (nextBtn) nextBtn.innerHTML = uiIcons.arrowRight;
+};
+
 // --- D. Build Projects ---
 const initProjects = () => {
+    if (!carouselWrapper) return;
+
+    // Clear and Rebuild
     carouselWrapper.innerHTML = '';
-    projectData.forEach((project, index) => {
+    track = document.createElement('div');
+    track.className = 'project-track';
+
+    // Duplicate data x2 so we never run out of cards
+    const infiniteData = [...projectData, ...projectData];
+
+    infiniteData.forEach((project) => {
         const card = document.createElement('div');
         card.className = 'project-card';
-        // We inject the image, title as alt text
+
+        // Store text data in the DOM element
+        card.dataset.title = project.title;
+        card.dataset.tech = project.tech;
+
         card.innerHTML = `<img src="${project.img}" alt="${project.title}" class="card-img">`;
-        carouselWrapper.appendChild(card);
+        track.appendChild(card);
     });
-    // Update our NodeList after injection
-    cards = document.querySelectorAll('.project-card');
+
+    carouselWrapper.appendChild(track);
+
+    // Set initial active state
+    updateActiveState();
 };
 
 // --- E. Build Contact Form (NEW) ---
@@ -225,43 +251,103 @@ const initFooter = () => {
    5. LOGIC (Movement & Interaction)
    ========================================= */
 
-const getModIndex = (index, length) => {
-    // This handles negative numbers correctly (e.g., -1 becomes last index)
-    return ((index % length) + length) % length;
+const updateActiveState = () => {
+    if (!track) return;
+
+    const allCards = Array.from(track.children);
+    allCards.forEach(c => c.classList.remove('active'));
+
+    const activeCard = allCards[1]; // Center item
+
+    if (activeCard) {
+        activeCard.classList.add('active');
+
+        // 1. UPDATE CONTENT
+        projectTitle.innerText = activeCard.dataset.title;
+        projectDetails.innerText = activeCard.dataset.tech;
+
+        // 2. TRIGGER FADE IN
+        // We remove the class, causing CSS to transition opacity back to 1
+        if (projectTextContainer) {
+            projectTextContainer.classList.remove('text-fade-out');
+        }
+    }
 };
 
-// --- F. Update UI State ---
-const updateCarousel = () => {
-    if (cards.length === 0) return;
-
-    // 1. Reset all cards
-    cards.forEach(card => card.classList.remove('active', 'prev', 'next'));
-
-    // 2. Calculate Indices
-    const activeIndex = getModIndex(currentIndex, cards.length);
-    const prevIndex = getModIndex(currentIndex - 1, cards.length);
-    const nextIndex = getModIndex(currentIndex + 1, cards.length);
-
-    // 3. Apply Classes (View)
-    cards[activeIndex].classList.add('active');
-    cards[prevIndex].classList.add('prev');
-    cards[nextIndex].classList.add('next');
-
-    // 4. Update Text (Data)
-    const data = projectData[activeIndex];
-    projectTitle.innerText = data.title;
-    projectDetails.innerText = data.tech;
-};
-
-// --- G. Handlers ---
+// --- C. Handle Next (Slide Left -> Rotate) ---
 const handleNext = () => {
-    currentIndex++;
-    updateCarousel();
+    if (isAnimating || !track) return;
+    isAnimating = true;
+
+    // 1. TRIGGER FADE OUT
+    if (projectTextContainer) {
+        projectTextContainer.classList.add('text-fade-out');
+    }
+
+    // 2. LOCK BUTTONS
+    nextBtn.style.pointerEvents = 'none';
+    prevBtn.style.pointerEvents = 'none';
+
+    // 3. SLIDE TRACK
+    track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    track.style.transform = `translateX(-${step}px)`;
+
+    // 4. CLEANUP (Wait for slide to finish)
+    const unlock = (e) => {
+        if (e.target !== track) return; // Ignore bubbling
+        track.removeEventListener('transitionend', unlock);
+
+        track.appendChild(track.firstElementChild);
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(0)';
+        void track.offsetWidth;
+
+        updateActiveState(); // This triggers the text Fade In
+
+        isAnimating = false;
+        nextBtn.style.pointerEvents = 'auto';
+        prevBtn.style.pointerEvents = 'auto';
+    };
+
+    track.addEventListener('transitionend', unlock);
+    setTimeout(() => { if (isAnimating) unlock({ target: track }); }, 550);
 };
 
+// --- Handle Prev (The "Fade Out" Moment) ---
 const handlePrev = () => {
-    currentIndex--;
-    updateCarousel();
+    if (isAnimating || !track) return;
+    isAnimating = true;
+
+    // 1. TRIGGER FADE OUT
+    if (projectTextContainer) {
+        projectTextContainer.classList.add('text-fade-out');
+    }
+
+    // 2. LOCK BUTTONS
+    nextBtn.style.pointerEvents = 'none';
+    prevBtn.style.pointerEvents = 'none';
+
+    track.style.transition = 'none';
+    track.prepend(track.lastElementChild);
+    track.style.transform = `translateX(-${step}px)`;
+    void track.offsetWidth;
+
+    track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    track.style.transform = 'translateX(0)';
+
+    const unlock = (e) => {
+        if (e.target !== track) return;
+        track.removeEventListener('transitionend', unlock);
+
+        updateActiveState(); // This triggers the text Fade In
+
+        isAnimating = false;
+        nextBtn.style.pointerEvents = 'auto';
+        prevBtn.style.pointerEvents = 'auto';
+    };
+
+    track.addEventListener('transitionend', unlock);
+    setTimeout(() => { if (isAnimating) unlock({ target: track }); }, 550);
 };
 
 const wrapText = (text) => {
@@ -313,6 +399,7 @@ const initScrollAnimations = () => {
    ========================================= */
 
 // Run Generators
+initUI();
 initHero();
 initAbout();
 initSkills();
@@ -320,9 +407,6 @@ initProjects();
 initContact();
 initSocials();
 initFooter();
-
-// Run Logic
-updateCarousel();
 
 // Listeners
 if (nextBtn && prevBtn) {
@@ -332,7 +416,6 @@ if (nextBtn && prevBtn) {
 
 // Keyboard Navigation (Enhancement)
 document.addEventListener('keydown', (e) => {
-    // Only trigger if projects are in view (optional, but good practice)
     if (e.key === 'ArrowRight') handleNext();
     if (e.key === 'ArrowLeft') handlePrev();
 });

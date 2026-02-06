@@ -522,7 +522,6 @@ nav a:hover {
   padding: 100px 0;
   text-align: center;
   overflow: hidden;
-  /* Prevents horizontal scroll from side cards */
 }
 
 .projects-container {
@@ -557,74 +556,62 @@ nav a:hover {
   width: 100%;
   height: 450px;
   margin-bottom: 40px;
-  /* Allow visible so side cards don't get cut off immediately */
-  overflow: visible;
+  overflow: hidden;
+  /* Hides the cards rotating off-screen */
+
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+
+  /* Mask for edge fading */
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
-/* Base Card Style (Hidden by default) */
+.project-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+
+  /* --- THE CENTERING LOGIC --- */
+  /* This shifts the entire track left so the 2nd Card (Index 1) is in the middle. */
+  /* Calculation: (Card 0 Width + Gap) + (Card 1 Width / 2) */
+  /* 710 + 60 + 355 = 1125px */
+  margin-left: calc(50% - 1125px);
+
+  will-change: transform;
+}
+
+/* Base Card Style */
 .project-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  flex-shrink: 0;
+  width: 710px;
+  height: 450px;
   background: #D9D9D9;
   border: 1px solid #000000;
   border-radius: 10px;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  /* Smooth snap */
-  width: 0;
-  height: 0;
-  opacity: 0;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  /* Default State (Inactive) */
+  opacity: 0.5;
+  filter: blur(4px);
+  transform: scale(0.95);
+  transition: all 0.5s ease;
 }
 
 .card-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  /* Cover ensures image fills the box */
+  object-fit: cover;
 }
 
-/* --- Dynamic Classes (Logic States) --- */
-
-/* 1. The Active Card (Center) */
+/* --- Active State (Center Card) --- */
 .project-card.active {
-  width: 710px;
-  height: 450px;
   opacity: 1;
-  z-index: 10;
   filter: blur(0);
-  transform: translate(-50%, -50%);
-}
-
-/* 2. The Previous Card (Left) */
-.project-card.prev {
-  width: 395px;
-  height: 426px;
-  opacity: 0.6;
-  /* Dimmed */
-  z-index: 5;
-  /* Moved left by 592.5px */
-  transform: translate(-50%, -50%) translateX(-592.5px);
-  filter: blur(2px);
-  /* Optional: Blur for depth */
-}
-
-/* 3. The Next Card (Right) */
-.project-card.next {
-  width: 395px;
-  height: 426px;
-  opacity: 0.6;
-  /* Dimmed */
-  z-index: 5;
-  /* Moved right by 592.5px */
-  transform: translate(-50%, -50%) translateX(592.5px);
-  filter: blur(2px);
-  /* Optional: Blur for depth */
+  transform: scale(1);
+  z-index: 10;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Controls --- */
@@ -640,6 +627,20 @@ nav a:hover {
 .project-text {
   width: 100%;
   text-align: left;
+
+  /* 1. ENGINEERING: Add Transition State */
+  /* We transition opacity and a slight movement for a "professional" feel */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. THE ANIMATION STATE */
+/* JS will add this class when the slide starts moving */
+.project-text.text-fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  /* Text floats up slightly as it vanishes */
 }
 
 .project-name {
@@ -648,7 +649,6 @@ nav a:hover {
   margin: 10px 0;
   line-height: 1;
   padding-right: 175px;
-  /* Space for buttons */
   text-transform: uppercase;
 }
 
@@ -688,15 +688,31 @@ nav a:hover {
   transition: all 0.2s ease;
 }
 
-.nav-btn img {
+/* --- Style the Injected SVG --- */
+.nav-btn svg {
   width: 24px;
   height: 24px;
+  /* This tells the SVG to look at the parent .nav-btn for its color */
+  stroke: currentColor;
+
+  /* Ensure no fill interferes */
+  fill: none;
 }
 
+/* --- Hover State --- */
 .nav-btn:hover {
   background: var(--text-dark);
-  /* Use filter to invert black icon to white on hover */
-  filter: invert(1);
+  border-color: var(--text-dark);
+
+  /* 2. CHANGE COLOR */
+  /* When this turns white, the SVG stroke instantly turns white too */
+  color: #FFFFFF;
+}
+
+/* --- Disabled State (JS Lock) --- */
+.nav-btn[style*="pointer-events: none"] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* --- 7. Contact Section --- */
