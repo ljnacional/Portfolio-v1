@@ -171,12 +171,12 @@ const initUI = () => {
 const initProjects = () => {
     if (!carouselWrapper) return;
 
-    // Clear and Rebuild
+    // 1. Clear and Rebuild
     carouselWrapper.innerHTML = '';
     track = document.createElement('div');
     track.className = 'project-track';
 
-    // Duplicate data x2 so we never run out of cards
+    // 2. Duplicate data x2 so we never run out of cards
     const infiniteData = [...projectData, ...projectData];
 
     infiniteData.forEach((project) => {
@@ -187,18 +187,29 @@ const initProjects = () => {
         card.dataset.title = project.title;
         card.dataset.tech = project.tech;
 
-        card.innerHTML = `<img src="${project.img}" alt="${project.title}" class="card-img">`;
+        // Ensure image is draggable=false so it doesn't interfere with sliding
+        card.innerHTML = `<img src="${project.img}" alt="${project.title}" class="card-img" draggable="false">`;
         track.appendChild(card);
     });
 
     carouselWrapper.appendChild(track);
 
-    // Set initial active state
+    // 3. ALIGNMENT FIX (Crucial Step)
+    // We physically move the LAST card to the FRONT immediately.
+    // This makes the order: [Last Project] -> [Project 1] -> [Project 2]...
+    // Since our logic centers the 2nd item, [Project 1] becomes centered.
+    if (track.children.length > 0) {
+        track.prepend(track.lastElementChild);
+    }
+
+    // 4. Set Initial State
     updateActiveState();
 };
 
 // --- E. Build Contact Form (NEW) ---
 const initContact = () => {
+    if (!contactTitle) return;
+
     contactTitle.innerText = contactData.title;
     formName.placeholder = contactData.form.namePlaceholder;
     formEmail.placeholder = contactData.form.emailPlaceholder;
@@ -207,38 +218,50 @@ const initContact = () => {
 
     connectWord1.innerText = contactData.connectTitle.word1;
     connectWord2.innerText = contactData.connectTitle.word2;
+
+    // Optional: Prevent page refresh on submit (since there is no backend yet)
+    if (formBtn) {
+        formBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("test");
+        });
+    }
 };
 
 // --- F. Build Social Icons (UPDATED) ---
 // We now render icons into TWO places: Header and Contact Section
 const initSocials = () => {
-    // 1. Function to create an Icon Link
+    // Helper to create an icon link
     const createIcon = (link, isHeader) => {
         const a = document.createElement('a');
         a.href = link.url;
         a.target = "_blank";
 
-        // Header uses class 'nav-icon', Contact uses 'icon-box' (per your CSS)
         if (isHeader) {
+            a.className = 'nav-icon-link'; // Class for header styling
             a.innerHTML = `<img src="${link.icon}" alt="${link.name}" class="nav-icon">`;
         } else {
-            a.className = 'icon-box';
+            a.className = 'icon-box'; // Class for contact section
             a.innerHTML = `<img src="${link.icon}" alt="${link.name}">`;
         }
         return a;
     };
 
-    // 2. Clear containers
-    headerSocials.innerHTML = '';
-    contactSocials.innerHTML = '';
+    // 1. Fill Header Socials (if element exists)
+    if (headerSocials) {
+        headerSocials.innerHTML = '';
+        socialLinks.forEach(link => {
+            headerSocials.appendChild(createIcon(link, true));
+        });
+    }
 
-    // 3. Fill Both Containers
-    socialLinks.forEach(link => {
-        // Append to Header
-        headerSocials.appendChild(createIcon(link, true));
-        // Append to Contact Section
-        contactSocials.appendChild(createIcon(link, false));
-    });
+    // 2. Fill Contact Socials (if element exists)
+    if (contactSocials) {
+        contactSocials.innerHTML = '';
+        socialLinks.forEach(link => {
+            contactSocials.appendChild(createIcon(link, false));
+        });
+    }
 };
 
 // --- G. Build Footer ---
@@ -404,6 +427,9 @@ initHero();
 initAbout();
 initSkills();
 initProjects();
+if (typeof initSkills === 'function') initSkills();
+if (typeof initProjects === 'function') initProjects();
+if (typeof initUI === 'function') initUI(); // Arrows
 initContact();
 initSocials();
 initFooter();

@@ -28,7 +28,7 @@ export const aboutData = {
 
 // 3. SKILLS DATA
 export const skillsData = [
-  { name: "HTML 5 asdadas", icon: "/Images/html5.svg" },
+  { name: "HTML 5", icon: "/Images/html5.svg" },
   { name: "CSS", icon: "/Images/ccs.svg" },
   { name: "JavaScript", icon: "/Images/javascript.svg" },
   { name: "Bootstrap", icon: "/Images/bootstrap.svg" },
