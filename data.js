@@ -60,9 +60,24 @@ export const projectData = [
   }
 ];
 
+// CONTACT SECTION DATA
+export const contactData = {
+  title: "CONTACT ME",
+  form: {
+    namePlaceholder: "Juan Dela Cruz",
+    emailPlaceholder: "juandelacruz1@gmail.com",
+    messagePlaceholder: "How can I help you?",
+    btnText: "Submit Message"
+  },
+  connectTitle: {
+    word1: "LET’S",
+    word2: "CONNECT"
+  }
+};
+
 // 5. SOCIAL LINKS
 export const socialLinks = [
   { name: "LinkedIn", url: "https://linkedin.com/in/yourusername", icon: "/Images/linkedin.svg" },
-  { name: "GitHub", url: "https://github.com/yourusername", icon: "/Images/github.svg" },
-  { name: "Email", url: "mailto:juandelacruz1@gmail.com", icon: "/Images/mail.svg" }
+  { name: "GitHub", url: "https://github.com/ljnacional", icon: "/Images/github.svg" },
+  { name: "Email", url: "mailto:ljnacional01@gmail.com", icon: "/Images/mail.svg" }
 ];
