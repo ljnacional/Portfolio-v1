@@ -163,10 +163,11 @@ const initProjects = () => {
     projectData.forEach((project, index) => {
         const card = document.createElement('div');
         card.className = 'project-card';
-        card.setAttribute('data-index', index);
+        // We inject the image, title as alt text
         card.innerHTML = `<img src="${project.img}" alt="${project.title}" class="card-img">`;
         carouselWrapper.appendChild(card);
     });
+    // Update our NodeList after injection
     cards = document.querySelectorAll('.project-card');
 };
 
@@ -225,27 +226,34 @@ const initFooter = () => {
    ========================================= */
 
 const getModIndex = (index, length) => {
+    // This handles negative numbers correctly (e.g., -1 becomes last index)
     return ((index % length) + length) % length;
 };
 
+// --- F. Update UI State ---
 const updateCarousel = () => {
     if (cards.length === 0) return;
 
+    // 1. Reset all cards
     cards.forEach(card => card.classList.remove('active', 'prev', 'next'));
 
+    // 2. Calculate Indices
     const activeIndex = getModIndex(currentIndex, cards.length);
     const prevIndex = getModIndex(currentIndex - 1, cards.length);
     const nextIndex = getModIndex(currentIndex + 1, cards.length);
 
+    // 3. Apply Classes (View)
     cards[activeIndex].classList.add('active');
     cards[prevIndex].classList.add('prev');
     cards[nextIndex].classList.add('next');
 
+    // 4. Update Text (Data)
     const data = projectData[activeIndex];
     projectTitle.innerText = data.title;
     projectDetails.innerText = data.tech;
 };
 
+// --- G. Handlers ---
 const handleNext = () => {
     currentIndex++;
     updateCarousel();
@@ -317,10 +325,14 @@ initFooter();
 updateCarousel();
 
 // Listeners
-nextBtn.addEventListener('click', handleNext);
-prevBtn.addEventListener('click', handlePrev);
+if (nextBtn && prevBtn) {
+    nextBtn.addEventListener('click', handleNext);
+    prevBtn.addEventListener('click', handlePrev);
+}
 
+// Keyboard Navigation (Enhancement)
 document.addEventListener('keydown', (e) => {
+    // Only trigger if projects are in view (optional, but good practice)
     if (e.key === 'ArrowRight') handleNext();
     if (e.key === 'ArrowLeft') handlePrev();
 });
