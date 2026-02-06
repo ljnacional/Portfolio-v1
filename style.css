@@ -158,10 +158,46 @@ nav a:hover {
   transform: translateY(-3px);
 }
 
+/* --- HERO ANIMATIONS --- */
+
+/* Text Character Animation */
+@keyframes fadeChar {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  /* Starts hidden */
+  animation: fadeChar 0.5s cubic-bezier(0.17, 0.5, 0.17, 1) forwards;
+  animation-delay: calc(var(--char-index) * 0.02s);
+  min-width: 0.25em;
+}
+
+/* Button Animation */
+.btn-fade-in {
+  opacity: 0;
+  /* Starts hidden */
+  animation: fadeChar 0.6s ease forwards;
+  animation-delay: 1.5s;
+  /* Wait for text to finish */
+}
+
 /* --- 4. About Me Section --- */
 .about-section {
   padding: 100px 0 50px;
   position: relative;
+  overflow: hidden;
 }
 
 .about-container {
@@ -175,12 +211,15 @@ nav a:hover {
   flex: 0 0 auto;
 }
 
+/* --- HIDDEN STATES (Wait for JS) --- */
+
+/* 1. Profile Image: Hidden & Left */
 .profile-img {
-  width: 601px;
-  height: 601px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  opacity: 0 !important;
+  /* Force invisible initially */
+  transform: translateX(-100px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
 }
 
 .about-content {
@@ -191,19 +230,33 @@ nav a:hover {
   max-width: 900px;
 }
 
-.glass-card,
-.skill-box {
+.glass-card {
   background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.9) 0%, #FFFFFF 77.08%, #FFFFFF 100%);
   backdrop-filter: blur(40px);
   border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.glass-card {
   border-radius: 50px;
   padding: 40px 50px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* 2. Cards: Hidden & Down */
+.about-card,
+.education-card {
+  opacity: 0 !important;
+  /* Force invisible initially */
+  transform: translateY(100px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+/* --- VISIBLE STATE (Triggered by JS) --- */
+.animate-visible {
+  opacity: 1 !important;
+  /* Force visible when class is added */
+  transform: translateX(0) translateY(0) !important;
+}
+
+/* Typography helper classes */
 .card-title {
   font-weight: 600;
   font-size: 30px;
@@ -230,10 +283,6 @@ nav a:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-}
-
-.edu-item:last-child {
-  margin-bottom: 0;
 }
 
 .edu-info h4 {
@@ -272,6 +321,7 @@ nav a:hover {
   flex: 1;
   min-width: 300px;
   text-align: left;
+  margin-top: 125px;
 }
 
 .role-text {
@@ -300,26 +350,41 @@ nav a:hover {
   text-transform: uppercase;
 }
 
+/* FIX 1: The Grid (Future-Proofing: Data Will Grow) */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* OLD: grid-template-columns: repeat(4, 1fr); */
+  /* NEW: Automatically fits columns. Minimum 150px wide, max 1 fraction. */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   width: 100%;
-  /* Ensure grid takes full width */
 }
 
+/* FIX 2 & 3: The Card Sizing & Alignment (Future-Proofing: Content Will Change) */
 .skill-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 170px;
-  height: 150px;
+
+  /* OLD: width: 170px; -> Let the grid control the width */
+  width: 100%;
+
+  /* OLD: height: 150px; -> Use min-height so it can grow */
+  min-height: 150px;
+
+  /* NEW: Add padding so text doesn't touch edges */
+  padding: 20px 10px;
+
+  /* NEW: Center text if it wraps to two lines */
+  text-align: center;
+
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
   margin: 0 auto;
-  /* Keeps boxes centered if grid cell is wide */
+  box-sizing: border-box;
+  /* Ensures padding doesn't break layout */
 }
 
 .skill-box:hover {
@@ -336,7 +401,6 @@ nav a:hover {
   margin-bottom: 10px;
 }
 
-/* Updated for IMG tags */
 .icon-wrapper img {
   width: 100%;
   height: 100%;
@@ -781,6 +845,24 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .section-subtitle {
+    font-size: 20px;
+  }
+
+  /* LOCATE THIS BLOCK in your 768px query */
+  .skills-typography {
+    text-align: center;
+    margin-bottom: 50px;
+
+    /* --- INSERT FUTURE PROOFING HERE --- */
+    /* This resets the 125px alignment gap so it doesn't push down on mobile */
+    margin-top: 0;
+  }
+
+  .role-text {
+    font-size: 50px;
+  }
+
   .nav-container {
     flex-direction: column;
     gap: 20px;

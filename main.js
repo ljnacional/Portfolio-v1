@@ -17,6 +17,7 @@ const heroBtnSecondary = document.querySelector('#hero-btn-secondary');
 const profileImg = document.querySelector('#profile-img');
 const aboutBio = document.querySelector('#about-bio');
 const educationContainer = document.querySelector('#education-list');
+const aboutCard = document.querySelector('.about-card');
 
 // Skills
 const skillsContainer = document.querySelector('#skills-list');
@@ -58,32 +59,54 @@ let cards = [];
 
 // --- A. Build Hero ---
 const initHero = () => {
-    heroGreeting.innerText = heroData.greeting;
-    heroHeadline.innerText = heroData.headline;
-    heroBtnPrimary.innerText = heroData.primaryBtn;
-    heroBtnSecondary.innerText = heroData.secondaryBtn;
+    // 1. Build Text (CSS Animation runs automatically on these chars)
+    if (heroGreeting) heroGreeting.innerHTML = wrapText(heroData.greeting);
+    if (heroHeadline) heroHeadline.innerHTML = wrapText(heroData.headline);
+
+    // 2. Build Buttons
+    if (heroBtnPrimary) {
+        heroBtnPrimary.innerText = heroData.primaryBtn;
+        heroBtnPrimary.classList.add('btn-fade-in');
+    }
+    if (heroBtnSecondary) {
+        heroBtnSecondary.innerText = heroData.secondaryBtn;
+        heroBtnSecondary.classList.add('btn-fade-in');
+    }
 };
 
 // --- B. Build About ---
 const initAbout = () => {
-    profileImg.src = aboutData.profileImage;
-    aboutBio.innerText = aboutData.bio;
+    const profileImg = document.querySelector('#profile-img');
+    const aboutBio = document.querySelector('#about-bio');
+    const educationContainer = document.querySelector('#education-list');
 
-    const oldItems = educationContainer.querySelectorAll('.edu-item');
-    oldItems.forEach(item => item.remove());
+    // 1. Fill Data
+    if (profileImg) profileImg.src = aboutData.profileImage;
+    if (aboutBio) aboutBio.innerText = aboutData.bio;
 
-    aboutData.education.forEach(edu => {
-        const div = document.createElement('div');
-        div.className = 'edu-item';
-        div.innerHTML = `
-            <div class="edu-info">
-              <h4>${edu.school}</h4>
-              <span>${edu.degree}</span>
-            </div>
-            <span class="edu-year">${edu.year}</span>
+    if (educationContainer) {
+        // Clear loading/old content
+        educationContainer.innerHTML = `
+            <h3 class="card-title">EDUCATION</h3>
+            <hr class="card-line">
         `;
-        educationContainer.appendChild(div);
-    });
+
+        aboutData.education.forEach(edu => {
+            const div = document.createElement('div');
+            div.className = 'edu-item';
+            div.innerHTML = `
+                <div class="edu-info">
+                  <h4>${edu.school}</h4>
+                  <span>${edu.degree}</span>
+                </div>
+                <span class="edu-year">${edu.year}</span>
+            `;
+            educationContainer.appendChild(div);
+        });
+    }
+
+    // 2. Setup Scroll Trigger
+    initScrollAnimations();
 };
 
 // --- C. Build Skills ---
@@ -201,6 +224,49 @@ const handlePrev = () => {
     updateCarousel();
 };
 
+const wrapText = (text) => {
+    return text.split('').map((char, index) => {
+        if (char === ' ') {
+            return `<span class="char" style="--char-index: ${index};">&nbsp;</span>`;
+        }
+        return `<span class="char" style="--char-index: ${index};">${char}</span>`;
+    }).join('');
+};
+
+const initScrollAnimations = () => {
+    // We observe the container to sync all 3 items
+    const sectionContainer = document.querySelector('.about-container');
+
+    // The items to reveal
+    const itemsToAnimate = [
+        document.querySelector('#profile-img'),
+        document.querySelector('.about-card'),
+        document.querySelector('.education-card')
+    ];
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Reveal all items at once
+                itemsToAnimate.forEach(item => {
+                    if (item) item.classList.add('animate-visible');
+                });
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        // THE FIX:
+        // "-250px" forces the user to scroll 250px PAST the start of the section
+        // before the animation triggers.
+        rootMargin: "0px 0px -250px 0px",
+        threshold: 0.1
+    });
+
+    if (sectionContainer) {
+        observer.observe(sectionContainer);
+    }
+};
+
 
 /* =========================================
    6. INITIALIZATION
@@ -211,7 +277,7 @@ initHero();
 initAbout();
 initSkills();
 initProjects();
-initContact(); // <--- Added this
+initContact();
 initSocials();
 initFooter();
 
