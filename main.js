@@ -111,18 +111,50 @@ const initAbout = () => {
 
 // --- C. Build Skills ---
 const initSkills = () => {
+    // Clear any existing content
     skillsContainer.innerHTML = '';
-    skillsData.forEach(skill => {
-        const box = document.createElement('div');
-        box.className = 'skill-box glass-card-small';
-        box.innerHTML = `
-            <div class="icon-wrapper">
-                <img src="${skill.icon}" alt="${skill.name}">
-            </div>
-            <span>${skill.name}</span>
-        `;
-        skillsContainer.appendChild(box);
-    });
+
+    // 1. Split Data Strategy
+    // We split the skills list in half to create two distinct rows
+    const half = Math.ceil(skillsData.length / 2);
+    const firstRowData = skillsData.slice(0, half);
+    const secondRowData = skillsData.slice(half);
+
+    // 2. Marquee Generator Function
+    const createMarquee = (items, direction) => {
+        const marquee = document.createElement('div');
+        marquee.className = `marquee ${direction}`;
+
+        const track = document.createElement('div');
+        track.className = 'track';
+
+        // 3. Infinity Loop Logic (The "DRY" Fix)
+        // We repeat the data 4 times. This ensures the track is long enough
+        // to scroll continuously without seeing a gap, regardless of screen width.
+        // [cite: 5]
+        const repeatCount = 4;
+        const loopItems = Array(repeatCount).fill(items).flat();
+
+        // 4. HTML Injection
+        loopItems.forEach(skill => {
+            const box = document.createElement('div');
+            box.className = 'skill-box'; // CSS handles the rest
+            box.innerHTML = `
+                <div class="icon-wrapper">
+                    <img src="${skill.icon}" alt="${skill.name}">
+                </div>
+                <span>${skill.name}</span>
+            `;
+            track.appendChild(box);
+        });
+
+        marquee.appendChild(track);
+        skillsContainer.appendChild(marquee);
+    };
+
+    // 5. Execute
+    createMarquee(firstRowData, 'scroll-left');
+    createMarquee(secondRowData, 'scroll-right');
 };
 
 // --- D. Build Projects ---

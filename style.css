@@ -307,6 +307,7 @@ nav a:hover {
 /* --- 5. Skills Section --- */
 .skills-section {
   padding: 100px 0;
+  overflow: hidden;
 }
 
 .skills-container {
@@ -321,7 +322,7 @@ nav a:hover {
   flex: 1;
   min-width: 300px;
   text-align: left;
-  margin-top: 125px;
+  margin-top: 80px;
 }
 
 .role-text {
@@ -341,6 +342,8 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 50%;
+  min-width: 300px;
 }
 
 .skills-title {
@@ -348,53 +351,85 @@ nav a:hover {
   font-size: 85px;
   color: var(--text-dark);
   text-transform: uppercase;
+  margin-bottom: 10px;
+  /* Reduced slightly to make room for padding below */
 }
 
-/* FIX 1: The Grid (Future-Proofing: Data Will Grow) */
-.bento-grid {
-  display: grid;
-  /* OLD: grid-template-columns: repeat(4, 1fr); */
-  /* NEW: Automatically fits columns. Minimum 150px wide, max 1 fraction. */
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
+/* --- MARQUEE STYLES --- */
+
+.marquee-wrapper {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* FIX: Added vertical padding here */
+  /* This creates empty space above/below the rows so the cards can "pop" up without getting cut off */
+  padding: 10px 0;
+  gap: 20px;
+  /* Increased gap between rows to prevent vertical overlap */
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-/* FIX 2 & 3: The Card Sizing & Alignment (Future-Proofing: Content Will Change) */
+.marquee {
+  width: 100%;
+  overflow: visible;
+  /* Changed to visible logic handled by wrapper or keep hidden with padding */
+  overflow-x: hidden;
+  /* Only hide horizontal overflow */
+  overflow-y: visible;
+  /* Allow vertical pop-out if needed, though padding usually fixes it */
+
+  /* FIX: Add padding to the marquee row itself to protect the hover state */
+  padding: 20px;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+  padding-left: 20px;
+  /* buffer */
+}
+
+.marquee.scroll-left .track {
+  animation: scroll 40s linear infinite;
+}
+
+.marquee.scroll-right .track {
+  animation: scroll 40s linear infinite reverse;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- CARD STYLING --- */
+
 .skill-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  /* OLD: width: 170px; -> Let the grid control the width */
-  width: 100%;
-
-  /* OLD: height: 150px; -> Use min-height so it can grow */
-  min-height: 150px;
-
-  /* NEW: Add padding so text doesn't touch edges */
-  padding: 20px 10px;
-
-  /* NEW: Center text if it wraps to two lines */
-  text-align: center;
-
-  border-radius: 30px;
+  width: 170px;
+  height: 180px;
+  padding: 15px;
+  border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-  margin: 0 auto;
-  box-sizing: border-box;
-  /* Ensures padding doesn't break layout */
-}
-
-.skill-box:hover {
-  transform: translateY(-5px);
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease, opacity 0.3s ease;
+  /* Added cubic-bezier for a "bouncier" feel */
 }
 
 .icon-wrapper {
-  width: 88px;
-  height: 82px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -409,8 +444,35 @@ nav a:hover {
 
 .skill-box span {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   color: var(--text-dark);
+  text-align: center;
+}
+
+/* --- INTERACTION EFFECTS --- */
+
+.marquee-wrapper:hover .track {
+  animation-play-state: paused;
+}
+
+/* Blur siblings */
+.marquee-wrapper:hover .skill-box {
+  filter: blur(4px);
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+/* Highlight hovered item */
+.marquee-wrapper .skill-box:hover {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1.05);
+  /* Increased scale slightly since we now have room */
+  z-index: 100;
+  /* Ensure it sits on top of everything */
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 /* --- 6. Projects Section --- */
