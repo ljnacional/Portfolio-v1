@@ -324,3 +324,26 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') handleNext();
     if (e.key === 'ArrowLeft') handlePrev();
 });
+
+// --- ANIMATION OBSERVER ---
+// This watches for elements with '.fade-up' entering the screen
+const observerOptions = {
+    threshold: 0.1 // Trigger when 10% of the item is visible
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            // Add the class that forces opacity: 1
+            entry.target.classList.add('visible');
+
+            // Stop watching this element (runs only once)
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Attach observer to all fade elements
+document.querySelectorAll('.fade-up').forEach((el) => {
+    observer.observe(el);
+});

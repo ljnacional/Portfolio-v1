@@ -475,6 +475,48 @@ nav a:hover {
   cursor: pointer;
 }
 
+/* --- ANIMATION UTILITIES --- */
+
+/* 1. The Starting State (Invisible & Lower) */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  /* Pushed down slightly */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+  /* Optimization for browser rendering */
+}
+
+/* 2. The Ending State (Visible & In Place) */
+/* JS will add this class when the user scrolls */
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. The Stagger Delays (The "One-by-One" Effect) */
+/* We delay the transition so they don't all pop at once */
+.delay-1 {
+  transition-delay: 0.1s;
+}
+
+/* Architect */
+.delay-2 {
+  transition-delay: 0.2s;
+}
+
+/* Developer */
+.delay-3 {
+  transition-delay: 0.3s;
+}
+
+/* Skills Title */
+.delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* The Marquee Grid */
+
 /* --- 6. Projects Section --- */
 .projects-section {
   padding: 100px 0;
