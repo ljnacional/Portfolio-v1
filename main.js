@@ -15,41 +15,45 @@ const selectors = {
     currentYearSpan: document.querySelector('#current-year'),
 
     // --- Navigation & Theme ---
-    headerSocials: document.querySelector('#social-container'), // Socials in the top-right
-    themeToggle: document.querySelector('#theme-toggle'), // Darkmode button
+    headerSocials: document.querySelector('#social-container'),
+    themeToggle: document.querySelector('#theme-toggle'),
+
+    // NEW: Menu Selectors
+    menuBtn: document.querySelector('#menu-btn'),
+    navbar: document.querySelector('#navbar'),
 
     // --- Hero Section ---
-    heroGreeting: document.querySelector('#hero-greeting'), // "Hello, I am..."
-    heroHeadline: document.querySelector('#hero-headline'), // Main creative concept text
-    heroBtnPrimary: document.querySelector('#hero-btn-primary'), // "Projects" button
-    heroBtnSecondary: document.querySelector('#hero-btn-secondary'), // "About Me" button
+    heroGreeting: document.querySelector('#hero-greeting'),
+    heroHeadline: document.querySelector('#hero-headline'),
+    heroBtnPrimary: document.querySelector('#hero-btn-primary'),
+    heroBtnSecondary: document.querySelector('#hero-btn-secondary'),
 
     // --- About Section ---
-    profileImg: document.querySelector('#profile-img'), // Portfolio picture
-    aboutBio: document.querySelector('#about-bio'), // Biography text
-    eduContainer: document.querySelector('#education-list'), // Education card list
-    aboutContainer: document.querySelector('.about-container'), // Main wrapper for scroll trigger
+    profileImg: document.querySelector('#profile-img'),
+    aboutBio: document.querySelector('#about-bio'),
+    eduContainer: document.querySelector('#education-list'),
+    aboutContainer: document.querySelector('.about-container'),
 
     // --- Skills Section ---
-    skillsContainer: document.querySelector('#skills-list'), // Marquee/grid wrapper
+    skillsContainer: document.querySelector('#skills-list'),
 
     // --- Projects Section (Carousel) ---
-    carouselWrapper: document.querySelector('#carousel-wrapper'), // Carousel container
-    projectTitle: document.querySelector('#project-title'), // Active project name
-    projectTextContainer: document.querySelector('.project-text'), // Wrapper for title/details text
-    projectDetails: document.querySelector('#project-details'), // Active project tech/tools
-    prevBtn: document.querySelector('#prevBtn'), // Carousel left nav
-    nextBtn: document.querySelector('#nextBtn'), // Carousel right nav
+    carouselWrapper: document.querySelector('#carousel-wrapper'),
+    projectTitle: document.querySelector('#project-title'),
+    projectTextContainer: document.querySelector('.project-text'),
+    projectDetails: document.querySelector('#project-details'),
+    prevBtn: document.querySelector('#prevBtn'),
+    nextBtn: document.querySelector('#nextBtn'),
 
     // --- Contact Section ---
-    contactTitle: document.querySelector('#contact-title'), // "CONTACT ME" header
-    formName: document.querySelector('#form-name'), // Input: Name
-    formEmail: document.querySelector('#form-email'), // Input: Email
-    formMessage: document.querySelector('#form-message'), // Textarea: Message
-    formBtn: document.querySelector('#form-btn'), // Submit button
-    connectWord1: document.querySelector('#connect-word-1'), // "LET'S"
-    connectWord2: document.querySelector('#connect-word-2'), // "CONNECT"
-    contactSocials: document.querySelector('#connect-icons-list') // Icons in the right contact panel
+    contactTitle: document.querySelector('#contact-title'),
+    formName: document.querySelector('#form-name'),
+    formEmail: document.querySelector('#form-email'),
+    formMessage: document.querySelector('#form-message'),
+    formBtn: document.querySelector('#form-btn'),
+    connectWord1: document.querySelector('#connect-word-1'),
+    connectWord2: document.querySelector('#connect-word-2'),
+    contactSocials: document.querySelector('#connect-icons-list')
 };
 
 /* =========================================
@@ -65,7 +69,6 @@ const STEP = CARD_WIDTH + GAP;
    4. HELPER FUNCTIONS 
    ========================================= */
 
-// NEW: Fixed Word-wrapping text generator
 const wrapText = (text) => {
     return text.split(' ').map((word) => {
         const wordChars = word.split('').map((char) => {
@@ -306,6 +309,20 @@ const init = () => {
         document.body.classList.toggle('dark-mode');
         localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
         setTimeout(() => { isThemeSwitching = false; }, 300);
+    });
+
+    // --- NEW: Toggle Mobile Menu ---
+    if (selectors.menuBtn) {
+        selectors.menuBtn.addEventListener('click', () => {
+            selectors.navbar.classList.toggle('active');
+        });
+    }
+
+    // --- NEW: Close Menu on Link Click ---
+    selectors.navbar.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            selectors.navbar.classList.remove('active');
+        });
     });
 
     selectors.nextBtn.addEventListener('click', handleNext);
