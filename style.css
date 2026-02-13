@@ -21,7 +21,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Handles Big Screens (1920px+) automatically */
 .container {
   max-width: 1620px;
   margin: 0 auto;
@@ -29,7 +28,89 @@ body {
   width: 100%;
 }
 
-/* --- 2. Header / Navbar --- */
+/* --- 2. Shared Components & Global Animations --- */
+.btn,
+.submit-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 22px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn {
+  min-width: 125px;
+  height: 52px;
+  padding: 0 20px;
+  background: var(--accent-gray);
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.btn:hover,
+.submit-btn:hover {
+  background: var(--text-main);
+  color: #FFFFFF;
+  transform: translateY(-3px);
+}
+
+.glass-card {
+  background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.9) 0%, #FFFFFF 77.08%, #FFFFFF 100%);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 50px;
+  padding: 40px 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Scroll & Fade Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeChar {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.delay-1 {
+  transition-delay: 0.1s;
+}
+
+.delay-2 {
+  transition-delay: 0.2s;
+}
+
+.delay-3 {
+  transition-delay: 0.3s;
+}
+
+.delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* --- 3. Header / Navbar --- */
 header {
   width: 100%;
   padding-top: 30px;
@@ -67,32 +148,25 @@ nav a:hover {
   color: #555555;
 }
 
-/* Social Icons (UPDATED FOR IMAGES) */
-.social-icons,
-.connect-icons {
+.social-icons {
   display: flex;
   gap: 30px;
   align-items: center;
 }
 
-.nav-icon,
-.icon-box img {
+.nav-icon {
   width: 30px;
   height: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
-  /* Filters are the only way to change color of img tags via CSS */
-  /* brightness(0) makes it black. opacity handles hover. */
 }
 
-.social-icons a:hover img,
-.connect-icons a:hover img {
+.social-icons a:hover img {
   transform: scale(1.1);
   opacity: 0.7;
-  /* Fade effect instead of color change */
 }
 
-/* --- 3. Hero Section --- */
+/* --- 4. Hero Section --- */
 .hero-section {
   padding: 100px 0 50px;
   display: flex;
@@ -129,71 +203,21 @@ nav a:hover {
   gap: 20px;
 }
 
-.btn,
-.submit-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 22px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.btn {
-  min-width: 125px;
-  height: 52px;
-  padding: 0 20px;
-  background: var(--accent-gray);
-  border: 1px solid var(--text-main);
-  color: var(--text-main);
-  text-decoration: none;
-}
-
-.btn:hover,
-.submit-btn:hover {
-  background: var(--text-main);
-  color: #FFFFFF;
-  transform: translateY(-3px);
-}
-
-/* --- HERO ANIMATIONS --- */
-
-/* Text Character Animation */
-@keyframes fadeChar {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(4px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
 .char {
   display: inline-block;
   opacity: 0;
-  /* Starts hidden */
   animation: fadeChar 0.5s cubic-bezier(0.17, 0.5, 0.17, 1) forwards;
   animation-delay: calc(var(--char-index) * 0.02s);
   min-width: 0.25em;
 }
 
-/* Button Animation */
 .btn-fade-in {
   opacity: 0;
-  /* Starts hidden */
   animation: fadeChar 0.6s ease forwards;
   animation-delay: 1.5s;
-  /* Wait for text to finish */
 }
 
-/* --- 4. About Me Section --- */
+/* --- 5. About Me Section --- */
 .about-section {
   padding: 100px 0 50px;
   position: relative;
@@ -211,12 +235,8 @@ nav a:hover {
   flex: 0 0 auto;
 }
 
-/* --- HIDDEN STATES (Wait for JS) --- */
-
-/* 1. Profile Image: Hidden & Left */
 .profile-img {
   opacity: 0 !important;
-  /* Force invisible initially */
   transform: translateX(-100px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
   will-change: opacity, transform;
@@ -230,33 +250,19 @@ nav a:hover {
   max-width: 900px;
 }
 
-.glass-card {
-  background: radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(255, 255, 255, 0.9) 0%, #FFFFFF 77.08%, #FFFFFF 100%);
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 50px;
-  padding: 40px 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* 2. Cards: Hidden & Down */
 .about-card,
 .education-card {
   opacity: 0 !important;
-  /* Force invisible initially */
   transform: translateY(100px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
   will-change: opacity, transform;
 }
 
-/* --- VISIBLE STATE (Triggered by JS) --- */
 .animate-visible {
   opacity: 1 !important;
-  /* Force visible when class is added */
   transform: translateX(0) translateY(0) !important;
 }
 
-/* Typography helper classes */
 .card-title {
   font-weight: 600;
   font-size: 30px;
@@ -304,7 +310,7 @@ nav a:hover {
   min-width: 150px;
 }
 
-/* --- 5. Skills Section --- */
+/* --- 6. Skills Section --- */
 .skills-section {
   padding: 100px 0;
   overflow: hidden;
@@ -352,34 +358,23 @@ nav a:hover {
   color: var(--text-dark);
   text-transform: uppercase;
   margin-bottom: 10px;
-  /* Reduced slightly to make room for padding below */
 }
 
-/* --- MARQUEE STYLES --- */
-
+/* Marquee */
 .marquee-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* FIX: Added vertical padding here */
-  /* This creates empty space above/below the rows so the cards can "pop" up without getting cut off */
   padding: 10px 0;
   gap: 20px;
-  /* Increased gap between rows to prevent vertical overlap */
   position: relative;
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .marquee {
   width: 100%;
-  overflow: visible;
-  /* Changed to visible logic handled by wrapper or keep hidden with padding */
   overflow-x: hidden;
-  /* Only hide horizontal overflow */
   overflow-y: visible;
-  /* Allow vertical pop-out if needed, though padding usually fixes it */
-
-  /* FIX: Add padding to the marquee row itself to protect the hover state */
   padding: 20px;
 }
 
@@ -389,15 +384,6 @@ nav a:hover {
   width: max-content;
   will-change: transform;
   padding-left: 20px;
-  /* buffer */
-}
-
-.marquee.scroll-left .track {
-  animation: scroll 40s linear infinite;
-}
-
-.marquee.scroll-right .track {
-  animation: scroll 40s linear infinite reverse;
 }
 
 @keyframes scroll {
@@ -410,8 +396,15 @@ nav a:hover {
   }
 }
 
-/* --- CARD STYLING --- */
+.marquee.scroll-left .track {
+  animation: scroll 40s linear infinite;
+}
 
+.marquee.scroll-right .track {
+  animation: scroll 40s linear infinite reverse;
+}
+
+/* Skill Cards */
 .skill-box {
   display: flex;
   flex-direction: column;
@@ -424,7 +417,6 @@ nav a:hover {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.5);
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease, opacity 0.3s ease;
-  /* Added cubic-bezier for a "bouncier" feel */
 }
 
 .icon-wrapper {
@@ -449,75 +441,27 @@ nav a:hover {
   text-align: center;
 }
 
-/* --- INTERACTION EFFECTS --- */
-
 .marquee-wrapper:hover .track {
   animation-play-state: paused;
 }
 
-/* Blur siblings */
 .marquee-wrapper:hover .skill-box {
   filter: blur(4px);
   opacity: 0.6;
   transform: scale(0.9);
 }
 
-/* Highlight hovered item */
 .marquee-wrapper .skill-box:hover {
   filter: blur(0);
   opacity: 1;
   transform: scale(1.05);
-  /* Increased scale slightly since we now have room */
   z-index: 100;
-  /* Ensure it sits on top of everything */
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
-/* --- ANIMATION UTILITIES --- */
-
-/* 1. The Starting State (Invisible & Lower) */
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  /* Pushed down slightly */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
-  /* Optimization for browser rendering */
-}
-
-/* 2. The Ending State (Visible & In Place) */
-/* JS will add this class when the user scrolls */
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 3. The Stagger Delays (The "One-by-One" Effect) */
-/* We delay the transition so they don't all pop at once */
-.delay-1 {
-  transition-delay: 0.1s;
-}
-
-/* Architect */
-.delay-2 {
-  transition-delay: 0.2s;
-}
-
-/* Developer */
-.delay-3 {
-  transition-delay: 0.3s;
-}
-
-/* Skills Title */
-.delay-4 {
-  transition-delay: 0.4s;
-}
-
-/* The Marquee Grid */
-
-/* --- 6. Projects Section --- */
+/* --- 7. Projects Section --- */
 .projects-section {
   padding: 100px 0;
   text-align: center;
@@ -550,20 +494,16 @@ nav a:hover {
   color: var(--text-light);
 }
 
-/* --- Carousel Layout --- */
+/* Carousel */
 .carousel-wrapper {
   position: relative;
   width: 100%;
   height: 450px;
   margin-bottom: 40px;
   overflow: hidden;
-  /* Hides the cards rotating off-screen */
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
-  /* Mask for edge fading */
   mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
@@ -572,17 +512,10 @@ nav a:hover {
   display: flex;
   align-items: center;
   gap: 60px;
-
-  /* --- THE CENTERING LOGIC --- */
-  /* This shifts the entire track left so the 2nd Card (Index 1) is in the middle. */
-  /* Calculation: (Card 0 Width + Gap) + (Card 1 Width / 2) */
-  /* 710 + 60 + 355 = 1125px */
   margin-left: calc(50% - 1125px);
-
   will-change: transform;
 }
 
-/* Base Card Style */
 .project-card {
   flex-shrink: 0;
   width: 710px;
@@ -591,8 +524,6 @@ nav a:hover {
   border: 1px solid #000000;
   border-radius: 10px;
   overflow: hidden;
-
-  /* Default State (Inactive) */
   opacity: 0.5;
   filter: blur(4px);
   transform: scale(0.95);
@@ -605,7 +536,6 @@ nav a:hover {
   object-fit: contain;
 }
 
-/* --- Active State (Center Card) --- */
 .project-card.active {
   opacity: 1;
   filter: blur(0);
@@ -614,7 +544,7 @@ nav a:hover {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* --- Controls --- */
+/* Project Controls */
 .project-controls {
   position: relative;
   width: 100%;
@@ -627,20 +557,12 @@ nav a:hover {
 .project-text {
   width: 100%;
   text-align: left;
-
-  /* 1. ENGINEERING: Add Transition State */
-  /* We transition opacity and a slight movement for a "professional" feel */
   transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 1;
-  transform: translateY(0);
 }
 
-/* 2. THE ANIMATION STATE */
-/* JS will add this class when the slide starts moving */
 .project-text.text-fade-out {
   opacity: 0;
   transform: translateY(-10px);
-  /* Text floats up slightly as it vanishes */
 }
 
 .project-name {
@@ -688,34 +610,24 @@ nav a:hover {
   transition: all 0.2s ease;
 }
 
-/* --- Style the Injected SVG --- */
 .nav-btn svg {
   width: 24px;
   height: 24px;
-  /* This tells the SVG to look at the parent .nav-btn for its color */
   stroke: currentColor;
-
-  /* Ensure no fill interferes */
   fill: none;
 }
 
-/* --- Hover State --- */
 .nav-btn:hover {
   background: var(--text-dark);
-  border-color: var(--text-dark);
-
-  /* 2. CHANGE COLOR */
-  /* When this turns white, the SVG stroke instantly turns white too */
   color: #FFFFFF;
 }
 
-/* --- Disabled State (JS Lock) --- */
 .nav-btn[style*="pointer-events: none"] {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* --- 7. Contact Section --- */
+/* --- 8. Contact Section --- */
 .contact-section {
   padding: 100px 0 150px;
 }
@@ -811,6 +723,9 @@ nav a:hover {
 }
 
 .connect-icons {
+  display: flex;
+  gap: 30px;
+  align-items: center;
   margin-top: 40px;
 }
 
@@ -822,6 +737,7 @@ nav a:hover {
 .icon-box img {
   width: 88px;
   height: 82px;
+  transition: all 0.3s ease;
 }
 
 .icon-box:hover {
@@ -829,7 +745,7 @@ nav a:hover {
   opacity: 0.6;
 }
 
-/* --- 8. Footer Section --- */
+/* --- 9. Footer Section --- */
 footer {
   width: 100%;
   padding: 50px 0;
@@ -883,11 +799,7 @@ footer {
   color: rgba(0, 0, 0, 0.6);
 }
 
-/* =========================================
-   9. MEDIA QUERIES (Responsive Logic)
-   ========================================= */
-
-/* --- Responsive: Mobile & Laptop --- */
+/* --- 10. Media Queries --- */
 @media (max-width: 1550px) {
 
   .project-card.prev,
@@ -910,19 +822,11 @@ footer {
   .section-subtitle {
     font-size: 30px;
   }
-
-  .nav-buttons {
-    position: absolute;
-  }
 }
 
 @media (max-width: 1200px) {
   .role-text {
     font-size: 60px;
-  }
-
-  .bento-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .contact-title {
@@ -988,13 +892,9 @@ footer {
     font-size: 20px;
   }
 
-  /* LOCATE THIS BLOCK in your 768px query */
   .skills-typography {
     text-align: center;
     margin-bottom: 50px;
-
-    /* --- INSERT FUTURE PROOFING HERE --- */
-    /* This resets the 125px alignment gap so it doesn't push down on mobile */
     margin-top: 0;
   }
 
@@ -1015,14 +915,6 @@ footer {
     justify-content: center;
   }
 
-  .logo {
-    margin-bottom: 10px;
-  }
-
-  .social-icons {
-    margin-top: 10px;
-  }
-
   .hero-main {
     font-size: 32px;
   }
@@ -1031,40 +923,13 @@ footer {
     font-size: 50px;
   }
 
-  .section-subtitle {
-    font-size: 20px;
-  }
-
-  .skills-typography {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  .role-text {
-    font-size: 50px;
-  }
-
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .project-controls {
-    margin-top: 20px;
-  }
-
-  .project-card {
-    width: 90%;
-    height: 300px;
-  }
-
+  .project-card,
   .carousel-wrapper {
     height: 300px;
   }
 
-  .project-card.active {
+  .project-card {
     width: 90%;
-    height: 100%;
   }
 
   .nav-buttons {
@@ -1076,19 +941,12 @@ footer {
     margin-top: 20px;
   }
 
-  .project-name {
-    padding-right: 0;
-    text-align: center;
-  }
-
-  .project-text {
-    text-align: center;
-    padding-right: 0;
-  }
-
+  .project-name,
+  .project-text,
   .project-label,
   .project-tech {
     text-align: center;
+    padding-right: 0;
   }
 
   .contact-title {
@@ -1118,10 +976,6 @@ footer {
 }
 
 @media (max-width: 380px) {
-  .nav-container {
-    padding: 0 10px;
-  }
-
   nav a {
     font-size: 16px;
   }
@@ -1162,10 +1016,7 @@ footer {
     height: 135px;
   }
 
-  .section-title {
-    font-size: 40px;
-  }
-
+  .section-title,
   .contact-title {
     font-size: 40px;
   }

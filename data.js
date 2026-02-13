@@ -38,22 +38,6 @@ export const skillsData = [
   { name: "Add Skill", icon: "/Images/image.svg" }
 ];
 
-// 5. UI ASSETS (Icons)
-export const uiIcons = {
-  arrowLeft: `
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m12 19-7-7 7-7"/>
-      <path d="M19 12H5"/>
-    </svg>
-  `,
-  arrowRight: `
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14"/>
-      <path d="m12 5 7 7-7 7"/>
-    </svg>
-  `
-};
-
 // 4. PROJECTS DATA
 export const projectData = [
   {
@@ -76,7 +60,7 @@ export const projectData = [
   }
 ];
 
-// CONTACT SECTION DATA
+// 5. CONTACT & SOCIAL DATA
 export const contactData = {
   title: "CONTACT ME",
   form: {
@@ -91,9 +75,14 @@ export const contactData = {
   }
 };
 
-// 5. SOCIAL LINKS
 export const socialLinks = [
   { name: "LinkedIn", url: "https://linkedin.com/in/yourusername", icon: "/Images/linkedin.svg" },
   { name: "GitHub", url: "https://github.com/ljnacional", icon: "/Images/github.svg" },
   { name: "Email", url: "mailto:ljnacional01@gmail.com", icon: "/Images/mail.svg" }
 ];
+
+// 6. UI ASSETS
+export const uiIcons = {
+  arrowLeft: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>`,
+  arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`
+};
