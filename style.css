@@ -231,7 +231,6 @@ body.dark-mode header.scrolled {
   color: var(--text-main);
 }
 
-/* WRAPPER FIX: Keeps layout stable on Desktop */
 .nav-wrapper {
   display: flex;
   align-items: center;
@@ -293,7 +292,6 @@ nav a:hover {
   opacity: 0.7;
 }
 
-/* Menu Toggle (Hidden on Desktop) */
 .menu-toggle {
   display: none;
   background: none;
@@ -315,7 +313,6 @@ nav a:hover {
     display: none;
   }
 
-  /* Hide socials in header to save space */
   .nav-wrapper {
     gap: 20px;
   }
@@ -368,6 +365,7 @@ nav a:hover {
 
 .hero-sub {
   font-size: 30px;
+  /* DESKTOP SIZE - UNTOUCHED */
   font-weight: 400;
   color: var(--text-light);
   text-transform: uppercase;
@@ -987,6 +985,7 @@ footer {
   }
 }
 
+/* --- MOBILE SPECIFIC OVERRIDES --- */
 @media (max-width: 768px) {
   .role-text {
     font-size: 50px;
@@ -996,11 +995,12 @@ footer {
     height: auto;
   }
 
-  /* Removed flex-direction column here, handled by wrapper */
+  /* Hero Fixes for Mobile ONLY */
   .hero-main {
     font-size: 32px;
   }
 
+  /* Kept as you had it */
   .section-title,
   .contact-title {
     font-size: 50px;
@@ -1019,5 +1019,25 @@ footer {
     position: relative;
     justify-content: center;
     margin-top: 20px;
+  }
+
+  /* NEW: Stack Hero Buttons on Mobile */
+  .hero-buttons {
+    flex-direction: column;
+    /* Stack them */
+    align-items: center;
+    gap: 15px;
+  }
+
+  /* NEW: Reduce Sub-headline on Mobile to prevent overflow */
+  .hero-sub {
+    font-size: 20px;
+    /* Reduced from 30px only for mobile */
+  }
+
+  /* NEW: Full width buttons on mobile */
+  .btn {
+    width: 100%;
+    max-width: 350px;
   }
 }
