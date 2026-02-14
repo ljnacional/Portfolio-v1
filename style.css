@@ -1,4 +1,6 @@
-/* --- 1. Variables & Global Reset --- */
+/* ==========================================================================
+   1. VARIABLES & DESIGN TOKENS
+   ========================================================================== */
 :root {
   --bg-color: #FFFFFF;
   --text-main: #000000;
@@ -19,6 +21,26 @@ body.dark-mode {
   --accent-gray: #1E1E1E;
   --input-bg: #2A2A2A;
   --header-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
 }
 
 /* THE STUTTER FIX: Layer Isolation */
@@ -56,43 +78,6 @@ section,
   -webkit-font-smoothing: antialiased;
 }
 
-/* HERO FIX: Word wrapping */
-.hero-main {
-  contain: paint;
-  color: var(--text-dark);
-}
-
-.word-wrapper {
-  display: inline-block;
-  white-space: nowrap;
-}
-
-.char {
-  display: inline-block;
-  opacity: 0;
-  color: inherit;
-  will-change: transform, opacity;
-  animation: fadeChar 0.5s cubic-bezier(0.17, 0.5, 0.17, 1) forwards;
-  animation-delay: calc(var(--char-index) * 0.02s);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--text-main);
-  overflow-x: hidden;
-}
-
 /* Synchronized transitions */
 a,
 button,
@@ -112,6 +97,9 @@ svg,
     transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* ==========================================================================
+   3. REUSABLE COMPONENTS (Layout & UI)
+   ========================================================================== */
 .container {
   max-width: 1620px;
   margin: 0 auto;
@@ -119,7 +107,6 @@ svg,
   width: 100%;
 }
 
-/* --- 2. Shared Components --- */
 .btn,
 .submit-btn {
   display: inline-flex;
@@ -163,38 +150,23 @@ body.dark-mode .glass-card {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-body.dark-mode .skill-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.card-title {
+  font-weight: 600;
+  font-size: 30px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
+.card-line {
+  border: none;
+  border-top: 0.5px solid var(--text-main);
+  margin-bottom: 25px;
+  opacity: 0.3;
 }
 
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes fadeChar {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(4px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-/* --- 3. Header / Navbar --- */
+/* ==========================================================================
+   4. HEADER & NAVIGATION
+   ========================================================================== */
 header {
   width: 100%;
   padding: 20px 0;
@@ -279,12 +251,6 @@ nav a {
   align-items: center;
 }
 
-.nav-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .nav-icon svg {
   width: 30px;
   height: 30px;
@@ -308,52 +274,9 @@ nav a {
   color: var(--text-main);
 }
 
-@media (max-width: 968px) {
-  .menu-toggle {
-    display: block;
-    z-index: 1002;
-  }
-
-  .social-icons {
-    display: none;
-  }
-
-  .nav-wrapper {
-    gap: 20px;
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--bg-color);
-    flex-direction: column;
-    justify-content: center;
-    gap: 40px;
-    z-index: 1001;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-  }
-
-  nav.active {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  nav a {
-    font-size: 32px;
-    font-weight: 600;
-  }
-
-  .theme-toggle {
-    transform: scale(1.5);
-  }
-}
-
-/* --- 4. Hero --- */
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
 .hero-section {
   padding: 100px 0 50px;
   display: flex;
@@ -376,19 +299,34 @@ nav a {
   margin-bottom: 30px;
 }
 
+.hero-main {
+  contain: paint;
+  color: var(--text-dark);
+}
+
 .hero-buttons {
   display: flex;
   margin-top: 30px;
   gap: 20px;
 }
 
-.btn-fade-in {
-  opacity: 0;
-  animation: fadeChar 0.6s ease forwards;
-  animation-delay: 1.5s;
+.word-wrapper {
+  display: inline-block;
+  white-space: nowrap;
 }
 
-/* --- 5. About --- */
+.char {
+  display: inline-block;
+  opacity: 0;
+  color: inherit;
+  will-change: transform, opacity;
+  animation: fadeChar 0.5s cubic-bezier(0.17, 0.5, 0.17, 1) forwards;
+  animation-delay: calc(var(--char-index) * 0.02s);
+}
+
+/* ==========================================================================
+   6. ABOUT SECTION
+   ========================================================================== */
 .about-section {
   padding: 100px 0 50px;
   position: relative;
@@ -429,25 +367,6 @@ nav a {
   will-change: opacity, transform;
 }
 
-.animate-visible {
-  opacity: 1 !important;
-  transform: translateX(0) translateY(0) !important;
-}
-
-.card-title {
-  font-weight: 600;
-  font-size: 30px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-}
-
-.card-line {
-  border: none;
-  border-top: 0.5px solid var(--text-main);
-  margin-bottom: 25px;
-  opacity: 0.3;
-}
-
 .about-text {
   font-size: 18px;
   line-height: 1.6;
@@ -481,7 +400,9 @@ nav a {
   min-width: 150px;
 }
 
-/* --- 6. Skills --- */
+/* ==========================================================================
+   7. SKILLS SECTION
+   ========================================================================== */
 .skills-section {
   padding: 100px 0;
   overflow: hidden;
@@ -556,16 +477,6 @@ nav a {
   padding-left: 20px;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 .marquee.scroll-left .track {
   animation: scroll 40s linear infinite;
 }
@@ -585,6 +496,11 @@ nav a {
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-mode .skill-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .icon-wrapper {
@@ -629,7 +545,9 @@ nav a {
   cursor: pointer;
 }
 
-/* --- 7. Projects --- */
+/* ==========================================================================
+   8. PROJECTS SECTION
+   ========================================================================== */
 .projects-section {
   padding: 100px 0;
   text-align: center;
@@ -790,7 +708,9 @@ nav a {
   color: var(--bg-color);
 }
 
-/* --- 8. Contact (UPDATED RESPONSIVE) --- */
+/* ==========================================================================
+   9. CONTACT SECTION
+   ========================================================================== */
 .contact-section {
   padding: 100px 0 150px;
 }
@@ -804,13 +724,11 @@ nav a {
 
 .contact-left {
   flex: 1 1 500px;
-  /* Allow shrinking but keep decent base width */
   max-width: 800px;
 }
 
 .contact-title {
   font-weight: 600;
-  /* Dynamic font scaling: Min 40px, Preferred 5vw, Max 95px */
   font-size: clamp(40px, 5vw, 95px);
   line-height: 100%;
   color: var(--text-dark);
@@ -869,7 +787,6 @@ nav a {
 
 .connect-text h2 {
   font-weight: 600;
-  /* Dynamic font scaling: Min 45px, Preferred 7vw, Max 110px */
   font-size: clamp(45px, 7vw, 110px);
   line-height: 100%;
   margin: 0;
@@ -907,7 +824,9 @@ nav a {
   opacity: 0.6;
 }
 
-/* --- 9. Footer --- */
+/* ==========================================================================
+   10. FOOTER
+   ========================================================================== */
 footer {
   width: 100%;
   padding: 60px 0;
@@ -921,7 +840,6 @@ footer {
   align-items: center;
   flex-wrap: wrap;
   gap: 40px;
-  /* Increased gap for better wrapping */
 }
 
 .footer-left {
@@ -952,7 +870,6 @@ footer {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
-  /* Allows links to wrap on very small screens */
 }
 
 .footer-nav a {
@@ -982,13 +899,72 @@ footer {
   opacity: 0.8;
 }
 
-/* =====================================================
-   10. MEDIA QUERIES
-   ===================================================== */
+/* ==========================================================================
+   11. ANIMATIONS & UTILITIES
+   ========================================================================== */
+.animate-visible {
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) !important;
+}
 
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-fade-in {
+  opacity: 0;
+  animation: fadeChar 0.6s ease forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fadeChar {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ==========================================================================
+   12. MEDIA QUERIES (Mobile-Responsive Overrides)
+   ========================================================================== */
+
+/* Narrow viewports - hide carousel ghosts */
+@media (max-width: 1550px) {
+
+  .project-card.prev,
+  .project-card.next {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Desktop Large / Tablet adjustments */
 @media (max-width: 1024px) {
-
-  /* Footer Tablet Adjustment */
   .footer-container {
     flex-direction: column;
     text-align: center;
@@ -999,58 +975,7 @@ footer {
     justify-content: center;
     gap: 30px;
   }
-}
 
-@media (max-width: 768px) {
-  footer {
-    padding: 40px 0;
-  }
-
-  .footer-name {
-    font-size: 20px;
-  }
-
-  .built-with {
-    font-size: 14px;
-  }
-
-  .footer-nav {
-    gap: 20px;
-  }
-
-  .footer-nav a {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* 2x2 grid for links on mobile */
-    gap: 15px;
-    width: 100%;
-  }
-
-  .footer-nav a {
-    text-align: center;
-  }
-}
-
-/* 1550px — ghost cards fade on narrower viewports */
-@media (max-width: 1550px) {
-
-  .project-card.prev,
-  .project-card.next {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-/* 1024px — TABLET (Fixes Contact Layout) */
-@media (max-width: 1024px) {
-
-  /* PROJECTS */
   .carousel-wrapper {
     height: 380px;
   }
@@ -1072,7 +997,6 @@ footer {
     font-size: clamp(22px, 3.2vw, 40px);
   }
 
-  /* ABOUT */
   .about-container {
     flex-direction: column;
     text-align: center;
@@ -1083,11 +1007,9 @@ footer {
     height: 300px;
   }
 
-  /* CONTACT (Stacking Logic) */
   .contact-container {
     flex-direction: column;
     align-items: center;
-    /* Center items in column */
   }
 
   .contact-left {
@@ -1103,7 +1025,6 @@ footer {
     text-align: center;
   }
 
-  /* Center the connect icons in this layout */
   .connect-icons {
     justify-content: center;
   }
@@ -1113,7 +1034,6 @@ footer {
     height: 60px;
   }
 
-  /* SKILLS */
   .skills-container {
     flex-direction: column;
     gap: 40px;
@@ -1130,10 +1050,74 @@ footer {
   }
 }
 
-/* 768px — MOBILE */
-@media (max-width: 768px) {
+/* Tablet / Mobile Menu */
+@media (max-width: 968px) {
+  .menu-toggle {
+    display: block;
+    z-index: 1002;
+  }
 
-  /* PROJECTS */
+  .social-icons {
+    display: none;
+  }
+
+  .nav-wrapper {
+    gap: 20px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    z-index: 1001;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  }
+
+  nav.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  nav a {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .theme-toggle {
+    transform: scale(1.5);
+  }
+}
+
+/* Mobile Phone */
+@media (max-width: 768px) {
+  footer {
+    padding: 40px 0;
+  }
+
+  .footer-name {
+    font-size: 20px;
+  }
+
+  .built-with {
+    font-size: 14px;
+  }
+
+  .footer-nav {
+    gap: 20px;
+  }
+
+  .footer-nav a {
+    font-size: 16px;
+  }
+
   .carousel-wrapper {
     height: 260px;
   }
@@ -1183,7 +1167,6 @@ footer {
     font-size: clamp(18px, 4.5vw, 28px);
   }
 
-  /* CONTACT MOBILE */
   .contact-section {
     padding: 60px 0;
   }
@@ -1192,9 +1175,6 @@ footer {
     text-align: center;
   }
 
-  /* Center "CONTACT ME" title */
-
-  /* GENERAL UI */
   .nav-container {
     height: auto;
   }
@@ -1283,15 +1263,23 @@ footer {
   }
 }
 
-/* 480px — EXTRA SMALL */
+/* Extra Small Mobile */
 @media (max-width: 480px) {
+  .footer-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+  }
 
-  /* CONTACT */
+  .footer-nav a {
+    text-align: center;
+  }
+
   .connect-text h2 {
     font-size: clamp(35px, 12vw, 50px);
   }
 
-  /* PROJECTS */
   .carousel-wrapper {
     height: 210px;
   }

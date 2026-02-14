@@ -1,36 +1,60 @@
 // main.js
 
-// 1. IMPORT ALL DATA
+/* =========================================
+   1. IMPORTS
+   ========================================= */
 import {
     heroData, aboutData, skillsData,
     projectData, contactData, socialLinks, uiIcons
 } from './data.js';
 
 /* =========================================
-   2. DOM SELECTION
+   2. CONSTANTS
+   ========================================= */
+// (Any static configuration constants would go here)
+
+/* =========================================
+   3. STATE
+   ========================================= */
+let track;
+let isAnimating = false;
+
+/* =========================================
+   4. DOM SELECTION
    ========================================= */
 const selectors = {
+    // Header & Global
     header: document.querySelector('header'),
     currentYearSpan: document.querySelector('#current-year'),
     headerSocials: document.querySelector('#social-container'),
     themeToggle: document.querySelector('#theme-toggle'),
     menuBtn: document.querySelector('#menu-btn'),
     navbar: document.querySelector('#navbar'),
+
+    // Hero Section
     heroGreeting: document.querySelector('#hero-greeting'),
     heroHeadline: document.querySelector('#hero-headline'),
     heroBtnPrimary: document.querySelector('#hero-btn-primary'),
     heroBtnSecondary: document.querySelector('#hero-btn-secondary'),
+
+    // About Section
     profileImg: document.querySelector('#profile-img'),
     aboutBio: document.querySelector('#about-bio'),
     eduContainer: document.querySelector('#education-list'),
     aboutContainer: document.querySelector('.about-container'),
+
+    // Skills Section
     skillsContainer: document.querySelector('#skills-list'),
+
+    // Projects Section
     carouselWrapper: document.querySelector('#carousel-wrapper'),
     projectTitle: document.querySelector('#project-title'),
     projectTextContainer: document.querySelector('.project-text'),
     projectDetails: document.querySelector('#project-details'),
     prevBtn: document.querySelector('#prevBtn'),
     nextBtn: document.querySelector('#nextBtn'),
+
+    // Contact Section
     contactTitle: document.querySelector('#contact-title'),
     formName: document.querySelector('#form-name'),
     formEmail: document.querySelector('#form-email'),
@@ -42,16 +66,7 @@ const selectors = {
 };
 
 /* =========================================
-   3. STATE
-   ========================================= */
-let track;
-let isAnimating = false;
-
-/* =========================================
-   4. RESPONSIVE STEP HELPER
-   Reads the live rendered card width + gap
-   so every breakpoint change in CSS is
-   automatically picked up — no magic numbers.
+   5. HELPER FUNCTIONS
    ========================================= */
 const getStep = () => {
     if (!track) return 770; // safe fallback
@@ -68,9 +83,6 @@ const getStep = () => {
     return cardWidth + gap;
 };
 
-/* =========================================
-   5. HELPER FUNCTIONS
-   ========================================= */
 const wrapText = (text) =>
     text.split(' ').map(word => {
         const chars = word.split('').map(c => `<span class="char">${c}</span>`).join('');
@@ -92,7 +104,7 @@ const createIcon = (link, isHeader) => {
 };
 
 /* =========================================
-   6. CORE GENERATORS
+   6. CORE FUNCTIONS (Generators & Logic)
    ========================================= */
 const initHero = () => {
     if (selectors.heroGreeting) {
@@ -156,7 +168,6 @@ const initProjects = () => {
     track = document.createElement('div');
     track.className = 'project-track';
 
-    // Double the list for infinite looping
     [...projectData, ...projectData].forEach(project => {
         const card = document.createElement('div');
         card.className = 'project-card';
@@ -167,17 +178,14 @@ const initProjects = () => {
     });
 
     selectors.carouselWrapper.appendChild(track);
-    track.prepend(track.lastElementChild); // move last card to front for prev-nav
+    track.prepend(track.lastElementChild);
 
-    // Set initial centering offset after the browser has laid out the cards
     requestAnimationFrame(() => {
         positionTrack();
         updateActiveState();
     });
 };
 
-/* Centre the track so card at index 1 (the active card) is in the
-   middle of the carousel wrapper */
 const positionTrack = () => {
     if (!track || !selectors.carouselWrapper) return;
     const firstCard = track.querySelector('.project-card');
@@ -187,10 +195,6 @@ const positionTrack = () => {
     const cardWidth = firstCard.offsetWidth;
     const gap = parseFloat(getComputedStyle(track).gap) || 60;
 
-    // card[0] is the pre-pended "last" card; card[1] is the first visible active card.
-    // We want card[1]'s left edge at (wrapperWidth/2 - cardWidth/2).
-    // card[1] starts at: marginLeft + cardWidth + gap
-    // So: marginLeft = (wrapperWidth/2 - cardWidth/2) - (cardWidth + gap)
     const ml = (wrapperWidth / 2 - cardWidth / 2) - (cardWidth + gap);
     track.style.marginLeft = `${ml}px`;
 };
@@ -207,7 +211,7 @@ const updateActiveState = () => {
         selectors.projectDetails.innerText = activeCard.dataset.tech;
         if (selectors.projectTextContainer) {
             selectors.projectTextContainer.classList.remove('text-fade-out');
-            void selectors.projectTextContainer.offsetWidth; // force reflow
+            void selectors.projectTextContainer.offsetWidth;
         }
     }
 };
@@ -233,11 +237,6 @@ const initSocials = () => {
     }
 };
 
-/* =========================================
-   7. CAROUSEL LOGIC
-   All pixel math uses getStep() so it
-   automatically adapts to every breakpoint.
-   ========================================= */
 const handleNext = () => {
     if (isAnimating || !track) return;
     isAnimating = true;
@@ -272,7 +271,7 @@ const handlePrev = () => {
     track.style.transition = 'none';
     track.prepend(track.lastElementChild);
     track.style.transform = `translateX(-${step}px)`;
-    void track.offsetWidth; // force reflow
+    void track.offsetWidth;
 
     track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
     track.style.transform = 'translateX(0)';
@@ -286,9 +285,6 @@ const handlePrev = () => {
     track.addEventListener('transitionend', unlock);
 };
 
-/* =========================================
-   8. SCROLL ANIMATIONS
-   ========================================= */
 const initScrollAnimations = () => {
     const aboutObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -320,17 +316,11 @@ const initScrollAnimations = () => {
     });
 };
 
-/* =========================================
-   9. RESIZE HANDLER
-   Re-centres the track when the viewport
-   changes (orientation flip, window drag, etc.)
-   ========================================= */
-let resizeTimer;
 const handleResize = () => {
+    let resizeTimer;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         if (!track) return;
-        // Cancel any in-flight animation cleanly
         track.style.transition = 'none';
         track.style.transform = 'translateX(0)';
         isAnimating = false;
@@ -340,29 +330,10 @@ const handleResize = () => {
 };
 
 /* =========================================
-   10. INITIALIZATION
+   7. EVENT LISTENERS
    ========================================= */
-const init = () => {
-    // Theme
-    if (localStorage.getItem('theme') === 'dark')
-        document.body.classList.add('dark-mode');
-
-    // Static assets
-    selectors.prevBtn.innerHTML = uiIcons.arrowLeft;
-    selectors.nextBtn.innerHTML = uiIcons.arrowRight;
-    if (selectors.themeToggle) selectors.themeToggle.innerHTML = uiIcons.darkMode;
-    selectors.currentYearSpan.innerText = new Date().getFullYear();
-
-    // Render
-    initHero();
-    initAbout();
-    initSkills();
-    initProjects();
-    initContact();
-    initSocials();
-    initScrollAnimations();
-
-    // Theme toggle
+// Theme toggle listener
+const setupThemeToggle = () => {
     let isThemeSwitching = false;
     selectors.themeToggle.addEventListener('click', () => {
         if (isThemeSwitching) return;
@@ -371,8 +342,10 @@ const init = () => {
         localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
         setTimeout(() => { isThemeSwitching = false; }, 300);
     });
+};
 
-    // Mobile menu
+// Mobile menu & Navbar listeners
+const setupNavigation = () => {
     if (selectors.menuBtn) {
         selectors.menuBtn.addEventListener('click', () =>
             selectors.navbar.classList.toggle('active'));
@@ -380,8 +353,10 @@ const init = () => {
 
     selectors.navbar.querySelectorAll('a').forEach(link =>
         link.addEventListener('click', () => selectors.navbar.classList.remove('active')));
+};
 
-    // Carousel controls
+// Carousel & Window listeners
+const setupGlobalListeners = () => {
     selectors.nextBtn.addEventListener('click', handleNext);
     selectors.prevBtn.addEventListener('click', handlePrev);
 
@@ -390,8 +365,36 @@ const init = () => {
         if (e.key === 'ArrowLeft') handlePrev();
     });
 
-    // Responsive resize
     window.addEventListener('resize', handleResize);
+};
+
+/* =========================================
+   8. INITIALIZATION
+   ========================================= */
+const init = () => {
+    // 1. Theme Check
+    if (localStorage.getItem('theme') === 'dark')
+        document.body.classList.add('dark-mode');
+
+    // 2. Static Assets Population
+    selectors.prevBtn.innerHTML = uiIcons.arrowLeft;
+    selectors.nextBtn.innerHTML = uiIcons.arrowRight;
+    if (selectors.themeToggle) selectors.themeToggle.innerHTML = uiIcons.darkMode;
+    selectors.currentYearSpan.innerText = new Date().getFullYear();
+
+    // 3. Render Sections
+    initHero();
+    initAbout();
+    initSkills();
+    initProjects();
+    initContact();
+    initSocials();
+    initScrollAnimations();
+
+    // 4. Set up Listeners
+    setupThemeToggle();
+    setupNavigation();
+    setupGlobalListeners();
 };
 
 document.addEventListener('DOMContentLoaded', init);
