@@ -910,7 +910,7 @@ nav a {
 /* --- 9. Footer --- */
 footer {
   width: 100%;
-  padding: 50px 0;
+  padding: 60px 0;
   border-top: 1px solid rgba(128, 128, 128, 0.2);
   margin-top: 50px;
 }
@@ -920,12 +920,21 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 40px;
+  /* Increased gap for better wrapping */
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .footer-name {
   font-weight: 600;
   font-size: 24px;
+  color: var(--text-main);
+  text-transform: uppercase;
 }
 
 .built-with {
@@ -942,6 +951,8 @@ footer {
 .footer-nav {
   display: flex;
   gap: 40px;
+  flex-wrap: wrap;
+  /* Allows links to wrap on very small screens */
 }
 
 .footer-nav a {
@@ -949,15 +960,82 @@ footer {
   font-size: 18px;
   color: var(--text-main);
   text-decoration: none;
+  position: relative;
+}
+
+.footer-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--text-main);
+  transition: width 0.3s ease;
+}
+
+.footer-nav a:hover::after {
+  width: 100%;
 }
 
 .footer-nav a:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 /* =====================================================
    10. MEDIA QUERIES
    ===================================================== */
+
+@media (max-width: 1024px) {
+
+  /* Footer Tablet Adjustment */
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .footer-nav {
+    justify-content: center;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 40px 0;
+  }
+
+  .footer-name {
+    font-size: 20px;
+  }
+
+  .built-with {
+    font-size: 14px;
+  }
+
+  .footer-nav {
+    gap: 20px;
+  }
+
+  .footer-nav a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2x2 grid for links on mobile */
+    gap: 15px;
+    width: 100%;
+  }
+
+  .footer-nav a {
+    text-align: center;
+  }
+}
 
 /* 1550px — ghost cards fade on narrower viewports */
 @media (max-width: 1550px) {
