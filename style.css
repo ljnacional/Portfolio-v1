@@ -988,19 +988,32 @@ footer {
     width: 60px;
     height: 60px;
   }
+
+  /* Skills Container Adjustment for Tablets */
+  .skills-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .skills-typography {
+    text-align: center;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .skills-grid-wrapper {
+    max-width: 100%;
+  }
 }
 
 /* --- MOBILE SPECIFIC OVERRIDES --- */
 @media (max-width: 768px) {
-  .role-text {
-    font-size: 50px;
-  }
 
+  /* ... Previous Hero/Header Overrides ... */
   .nav-container {
     height: auto;
   }
 
-  /* Hero Fixes for Mobile ONLY */
   .hero-main {
     font-size: 32px;
   }
@@ -1025,25 +1038,22 @@ footer {
     margin-top: 20px;
   }
 
-  /* Stack Hero Buttons on Mobile */
   .hero-buttons {
     flex-direction: column;
     align-items: center;
     gap: 15px;
   }
 
-  /* Reduce Sub-headline on Mobile */
   .hero-sub {
     font-size: 20px;
   }
 
-  /* Full width buttons on mobile */
   .btn {
     width: 100%;
     max-width: 350px;
   }
 
-  /* --- ABOUT SECTION MOBILE FIXES --- */
+  /* ... Previous About Overrides ... */
   .about-section {
     padding: 60px 0;
   }
@@ -1052,35 +1062,62 @@ footer {
     gap: 40px;
   }
 
-  /* Compact Glass Card Padding */
   .glass-card {
     padding: 30px 25px;
   }
 
-  /* Profile Image Sizing */
   .profile-img {
     width: 250px;
     height: 250px;
   }
 
-  /* Stack Education Info vertically */
   .edu-item {
     flex-direction: column;
     align-items: center;
-    /* Center since container is centered at 1024px */
     text-align: center;
     gap: 5px;
   }
 
-  /* Move Year below degree */
   .edu-year {
     text-align: center;
     margin-top: 5px;
     font-size: 16px;
   }
 
-  /* Slightly smaller headers inside cards */
   .edu-info h4 {
     font-size: 20px;
+  }
+
+  /* --- SKILLS SECTION MOBILE FIXES --- */
+  .skills-section {
+    padding: 60px 0;
+  }
+
+  /* Ensure typography fits on screen */
+  .role-text {
+    font-size: clamp(40px, 10vw, 70px);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  /* Adjust Marquee Sizing */
+  .skills-title {
+    font-size: 50px;
+    text-align: center;
+  }
+
+  .skill-box {
+    width: 140px;
+    height: 150px;
+    padding: 10px;
+  }
+
+  .icon-wrapper {
+    width: 45px;
+    height: 45px;
+  }
+
+  .skill-box span {
+    font-size: 16px;
   }
 }
