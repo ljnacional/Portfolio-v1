@@ -104,7 +104,8 @@ svg,
 .nav-btn,
 .card-line,
 .project-card {
-  transition: background var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    background var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
     background-color var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
     color var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
     border-color var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
@@ -118,6 +119,7 @@ svg,
   padding: 0 20px;
   width: 100%;
 }
+
 
 /* --- 2. Shared Components --- */
 .btn,
@@ -194,7 +196,8 @@ body.dark-mode .skill-box {
   }
 }
 
-/* --- 3. Header / Navbar (Alignment Fix) --- */
+
+/* --- 3. Header / Navbar --- */
 header {
   width: 100%;
   padding: 20px 0;
@@ -308,7 +311,6 @@ nav a {
   color: var(--text-main);
 }
 
-/* --- RESPONSIVE HEADER LOGIC --- */
 @media (max-width: 968px) {
   .menu-toggle {
     display: block;
@@ -354,7 +356,8 @@ nav a {
   }
 }
 
-/* --- 4. Sections --- */
+
+/* --- 4. Hero --- */
 .hero-section {
   padding: 100px 0 50px;
   display: flex;
@@ -389,7 +392,8 @@ nav a {
   animation-delay: 1.5s;
 }
 
-/* --- About --- */
+
+/* --- 5. About --- */
 .about-section {
   padding: 100px 0 50px;
   position: relative;
@@ -482,7 +486,8 @@ nav a {
   min-width: 150px;
 }
 
-/* --- Skills --- */
+
+/* --- 6. Skills --- */
 .skills-section {
   padding: 100px 0;
   overflow: hidden;
@@ -630,7 +635,8 @@ nav a {
   cursor: pointer;
 }
 
-/* --- Projects --- */
+
+/* --- 7. Projects ------------------------------------------ */
 .projects-section {
   padding: 100px 0;
   text-align: center;
@@ -646,6 +652,7 @@ nav a {
 .projects-header {
   margin-bottom: 60px;
   max-width: 1100px;
+  width: 100%;
 }
 
 .section-title {
@@ -663,29 +670,36 @@ nav a {
   color: var(--text-light);
 }
 
+/* Wrapper height must always equal card height — set together per breakpoint */
 .carousel-wrapper {
   position: relative;
   width: 100%;
   height: 450px;
+  /* desktop – kept in sync with .project-card height below */
   margin-bottom: 40px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
+/* margin-left is calculated and set by JS at init + resize so the
+   active card (index 1) is always centred in the wrapper */
 .project-track {
   display: flex;
   align-items: center;
   gap: 60px;
-  margin-left: calc(50% - 1125px);
+  /* JS reads this via getComputedStyle */
   will-change: transform;
 }
 
+/* Desktop card */
 .project-card {
   flex-shrink: 0;
   width: 710px;
+  /* JS reads this via getBoundingClientRect */
   height: 450px;
   background: var(--accent-gray);
   border: 1px solid var(--text-light);
@@ -711,10 +725,12 @@ nav a {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Controls width tracks the active card width */
 .project-controls {
   position: relative;
   width: 100%;
   max-width: 710px;
+  /* kept in sync with card width per breakpoint */
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -790,7 +806,8 @@ nav a {
   color: var(--bg-color);
 }
 
-/* --- Contact --- */
+
+/* --- 8. Contact --- */
 .contact-section {
   padding: 100px 0 150px;
 }
@@ -905,7 +922,8 @@ nav a {
   opacity: 0.6;
 }
 
-/* --- Footer --- */
+
+/* --- 9. Footer --- */
 footer {
   width: 100%;
   padding: 50px 0;
@@ -953,7 +971,12 @@ footer {
   opacity: 0.6;
 }
 
-/* --- 10. Media Queries --- */
+
+/* =====================================================
+   10. MEDIA QUERIES
+   ===================================================== */
+
+/* 1550px — ghost cards fade on narrower viewports */
 @media (max-width: 1550px) {
 
   .project-card.prev,
@@ -963,7 +986,32 @@ footer {
   }
 }
 
+/* 1024px — tablet */
 @media (max-width: 1024px) {
+
+  /* PROJECTS */
+  .carousel-wrapper {
+    height: 380px;
+  }
+
+  .project-card {
+    width: 560px;
+    height: 380px;
+  }
+
+  .project-controls {
+    max-width: 560px;
+  }
+
+  .section-title {
+    font-size: clamp(52px, 8vw, 110px);
+  }
+
+  .section-subtitle {
+    font-size: clamp(22px, 3.2vw, 40px);
+  }
+
+  /* About */
   .about-container {
     flex-direction: column;
     text-align: center;
@@ -974,6 +1022,7 @@ footer {
     height: 300px;
   }
 
+  /* Contact */
   .contact-container {
     flex-direction: column;
   }
@@ -989,7 +1038,7 @@ footer {
     height: 60px;
   }
 
-  /* Skills Container Adjustment for Tablets */
+  /* Skills */
   .skills-container {
     flex-direction: column;
     gap: 40px;
@@ -1006,10 +1055,61 @@ footer {
   }
 }
 
-/* --- MOBILE SPECIFIC OVERRIDES --- */
+/* 768px — mobile */
 @media (max-width: 768px) {
 
-  /* ... Previous Hero/Header Overrides ... */
+  /* PROJECTS */
+  .carousel-wrapper {
+    height: 260px;
+  }
+
+  .project-card {
+    width: min(460px, 84vw);
+    height: 260px;
+  }
+
+  .project-controls {
+    max-width: min(460px, 84vw);
+  }
+
+  .project-track {
+    gap: 24px;
+  }
+
+  /* Pull nav-buttons out of absolute so they sit below the text row */
+  .nav-buttons {
+    position: static;
+    justify-content: flex-start;
+    margin-top: 16px;
+  }
+
+  .project-name {
+    font-size: 22px;
+    padding-right: 0;
+  }
+
+  .project-label {
+    font-size: 18px;
+  }
+
+  .project-tech {
+    font-size: 16px;
+  }
+
+  .nav-btn {
+    width: 56px;
+    height: 56px;
+  }
+
+  .section-title {
+    font-size: clamp(36px, 11vw, 60px);
+  }
+
+  .section-subtitle {
+    font-size: clamp(18px, 4.5vw, 28px);
+  }
+
+  /* Other sections */
   .nav-container {
     height: auto;
   }
@@ -1018,24 +1118,8 @@ footer {
     font-size: 32px;
   }
 
-  .section-title,
   .contact-title {
-    font-size: 50px;
-  }
-
-  .project-card,
-  .carousel-wrapper {
-    height: 300px;
-  }
-
-  .project-card {
-    width: 90%;
-  }
-
-  .nav-buttons {
-    position: relative;
-    justify-content: center;
-    margin-top: 20px;
+    font-size: clamp(36px, 11vw, 60px);
   }
 
   .hero-buttons {
@@ -1053,7 +1137,6 @@ footer {
     max-width: 350px;
   }
 
-  /* ... Previous About Overrides ... */
   .about-section {
     padding: 60px 0;
   }
@@ -1088,19 +1171,16 @@ footer {
     font-size: 20px;
   }
 
-  /* --- SKILLS SECTION MOBILE FIXES --- */
   .skills-section {
     padding: 60px 0;
   }
 
-  /* Ensure typography fits on screen */
   .role-text {
     font-size: clamp(40px, 10vw, 70px);
     line-height: 1.2;
     text-align: center;
   }
 
-  /* Adjust Marquee Sizing */
   .skills-title {
     font-size: 50px;
     text-align: center;
@@ -1119,5 +1199,57 @@ footer {
 
   .skill-box span {
     font-size: 16px;
+  }
+}
+
+/* 480px — extra small */
+@media (max-width: 480px) {
+
+  /* PROJECTS */
+  .carousel-wrapper {
+    height: 210px;
+  }
+
+  .project-card {
+    width: min(320px, 88vw);
+    height: 210px;
+  }
+
+  .project-controls {
+    max-width: min(320px, 88vw);
+  }
+
+  .project-track {
+    gap: 16px;
+  }
+
+  .project-name {
+    font-size: 18px;
+  }
+
+  .project-label {
+    font-size: 15px;
+  }
+
+  .project-tech {
+    font-size: 13px;
+  }
+
+  .nav-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .nav-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 12vw, 48px);
+  }
+
+  .section-subtitle {
+    font-size: clamp(15px, 4.5vw, 22px);
   }
 }
