@@ -164,6 +164,31 @@ body.dark-mode .glass-card {
   opacity: 0.3;
 }
 
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--bg-color);
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* Success & Error modifiers for the .submit-btn */
+.submit-btn.success {
+  background-color: #28a745;
+  /* Success Green */
+  border-color: #28a745;
+  color: #ffffff;
+}
+
+.submit-btn.error {
+  background-color: #dc3545;
+  /* Error Red */
+  border-color: #dc3545;
+  color: #ffffff;
+}
+
 /* ==========================================================================
    4. HEADER & NAVIGATION
    ========================================================================== */
@@ -946,6 +971,16 @@ footer {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 

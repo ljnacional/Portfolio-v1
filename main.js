@@ -66,7 +66,7 @@ const selectors = {
 };
 
 /* =========================================
-   5. HELPER FUNCTIONS
+   5. HELPER FUNCTIONS 
    ========================================= */
 const getStep = () => {
     if (!track) return 770; // safe fallback
@@ -344,6 +344,83 @@ const setupThemeToggle = () => {
     });
 };
 
+// Contact Form Logic (Spinner + Web3Forms) ---
+const setupContactForm = () => {
+    const form = document.querySelector('.contact-form');
+    const msgInput = selectors.formMessage;
+    const btn = selectors.formBtn;
+
+    // 1. Enforce Character Limit (JS Fallback)
+    if (msgInput) {
+        msgInput.addEventListener('input', (e) => {
+            const limit = 200;
+            if (e.target.value.length > limit) {
+                e.target.value = e.target.value.slice(0, limit);
+            }
+        });
+    }
+
+    // 2. Submit Logic
+    if (form && btn) {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // FIX: Use reportValidity() to show the native error bubble
+            // This will highlight EXACTLY which field is missing
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return; // Stop execution here
+            }
+
+            // A. START LOADING STATE
+            const originalText = btn.innerText;
+            btn.innerHTML = `<div class="loading-spinner"></div>`; // Insert Spinner
+            btn.style.pointerEvents = 'none'; // Disable clicking
+
+            // Prepare Data
+            const formData = new FormData(form);
+            formData.append("access_key", "7828707c-b66f-4a56-8a4e-4c4a8e819b28");
+
+            try {
+                // B. API CALL
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    btn.classList.add('success');
+                    btn.innerText = "Message Sent!"; // Success Text
+                    form.reset();
+
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        btn.classList.remove('success');
+                        btn.innerText = originalText;
+                        btn.style.pointerEvents = 'auto';
+                    }, 3000);
+
+                } else {
+                    throw new Error(result.message);
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                btn.classList.add('error');
+                btn.innerText = "Failed. Try Again."; // Error Text
+
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    btn.classList.remove('error');
+                    btn.innerHTML = originalText;
+                    btn.style.pointerEvents = 'auto';
+                }, 3000);
+            }
+        });
+    }
+};
+
 // Mobile menu & Navbar listeners
 const setupNavigation = () => {
     if (selectors.menuBtn) {
@@ -395,6 +472,7 @@ const init = () => {
     setupThemeToggle();
     setupNavigation();
     setupGlobalListeners();
+    setupContactForm();
 };
 
 document.addEventListener('DOMContentLoaded', init);
