@@ -115,16 +115,19 @@
         <form class="contact-form">
           <div class="form-group">
             <label for="form-name">Name</label>
-            <input type="text" id="form-name" placeholder="" required>
+            <input type="text" id="form-name" name="name" placeholder="" required>
           </div>
+
           <div class="form-group">
             <label for="form-email">Email</label>
-            <input type="email" id="form-email" placeholder="" required>
+            <input type="email" id="form-email" name="email" placeholder="" required>
           </div>
+
           <div class="form-group">
             <label for="form-message">Message</label>
-            <textarea id="form-message" placeholder="" maxlength="200" required></textarea>
+            <textarea id="form-message" name="message" placeholder="" maxlength="200" required></textarea>
           </div>
+
           <button id="form-btn" type="submit" class="submit-btn">Submit</button>
         </form>
       </div>
